@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="brand_orange">#FF6B00</color>
+    <color name="pure_white">#FFFFFF</color>
+    <color name="deep_black">#121212</color>
+
+    <color name="soft_grey">#F5F5F5</color>
+    <color name="hint_grey">#9E9E9E</color>
+    <color name="star_active">#FF6B00</color>
+    <color name="star_inactive">#E0E0E0</color>
 </resources>

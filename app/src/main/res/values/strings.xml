@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">didik</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="btnLogin">Login</string>
+    <string name="plcPassword">Enter your password</string>
+    <string name="plcUsername">Enter your username</string>
+    <string name="tUsername">Username</string>
+    <string name="tPassword">Password</string>
+    <string name="tLogin">Login</string>
+    <string name="btnStart">Mulai Berkontribusi</string>
+    <string name="tvDesc">Baca ulasan jujur dari mahasiswa dan temukan tempat magang dengan kualitas mentor terbaik.</string>
+    <string name="tvTitle">Dari Mahasiswa,\nUntuk Mahasiswa.</string>
+    <string name="tvGreeting">Halo, Nadilah! 👋</string>
+    <string name="etSearch">Cari perusahaan atau posisi...</string>
+
 </resources>
