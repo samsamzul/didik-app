@@ -1,14 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".FormReviewFragment">
+    android:background="#F5F5F5"
+    android:paddingTop="20dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        app:tint="#FF6B00"
+        android:padding="8dp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Write your review"
+        android:textColor="#FF6B00"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@id/ivBack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/ivBack" />
 
-</FrameLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivBack">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="32dp"
+            android:paddingBottom="24dp"
+            android:paddingTop="20dp">
+
+            <TextView
+                style="@style/LabelForm"
+                android:text="Company Name" />
+
+            <EditText
+                android:id="@+id/etCompanyName"
+                style="@style/InputForm"
+                android:background="@drawable/bg_input_rounded"
+                android:drawableStart="@drawable/ic_company"
+                android:drawableTint="#FF6B00"
+                android:hint="enter company name" />
+
+            <TextView
+                style="@style/LabelForm"
+                android:layout_marginTop="16dp"
+                android:text="Position" />
+
+            <EditText
+                android:id="@+id/etPosition"
+                style="@style/InputForm"
+                android:background="@drawable/bg_input_rounded"
+                android:drawableStart="@drawable/ic_profile"
+                android:drawableTint="#FF6B00"
+                android:hint="enter your position" />
+
+            <TextView
+                style="@style/LabelForm"
+                android:layout_marginTop="16dp"
+                android:text="Job Description" />
+
+            <EditText
+                android:id="@+id/etJobDesc"
+                style="@style/InputForm"
+                android:background="@drawable/bg_input_rounded"
+                android:drawableStart="@drawable/ic_job_desc"
+                android:drawableTint="#FF6B00"
+                android:hint="enter your job desc" />
+
+            <TextView
+                style="@style/LabelForm"
+                android:layout_marginTop="16dp"
+                android:text="Review" />
+
+            <EditText
+                android:id="@+id/etReviewText"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="4dp"
+                android:background="@drawable/bg_input_rounded"
+                android:gravity="top|start"
+                android:hint="enter your review"
+                android:inputType="textMultiLine"
+                android:padding="16dp" />
+
+            <TextView
+                style="@style/LabelForm"
+                android:layout_marginTop="16dp"
+                android:text="Rating" />
+
+            <RatingBar
+                android:id="@+id/rbReview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="1"
+                android:progressTint="#FF6B00" />
+
+            <Button
+                android:id="@+id/btnSave"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#FF6B00"
+                android:fontFamily="@font/poppins_bold"
+                android:text="Send Review"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                app:cornerRadius="12dp" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

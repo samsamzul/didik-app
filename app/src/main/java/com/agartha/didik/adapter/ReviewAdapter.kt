@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.agartha.didik.data.ReviewModel
 import com.agartha.didik.databinding.ItemReviewBinding
 
-class ReviewAdapter(private val listReview: List<ReviewModel>) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
+class ReviewAdapter(
+    private val listReview: List<ReviewModel>,
+    private val onItemClick: (ReviewModel) -> Unit
+) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     class ViewHolder(val binding: ItemReviewBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -22,8 +25,15 @@ class ReviewAdapter(private val listReview: List<ReviewModel>) : RecyclerView.Ad
         holder.binding.ratingBar.rating = review.rating
         // Assuming reviewerName is not in the model yet, we can use a placeholder or update the model
         // For now, let's just keep the default from XML or set a placeholder
-        holder.binding.tvReviewerName.text = "Reviewer\nUser ${review.id}"
+        holder.binding.tvReviewerName.text = review.reviewerName
+
+        holder.itemView.setOnClickListener {
+            onItemClick(review)
+        }
     }
+
+
+
 
     override fun getItemCount(): Int = listReview.size
 }

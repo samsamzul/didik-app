@@ -5,6 +5,7 @@ data class ReviewModel(
     val companyName: String,
     val position: String,
     val jobDesc: String,
+    val reviewerName: String,
     val reviewText: String,
     val rating: Float
 )
