@@ -13,6 +13,9 @@ import com.agartha.didik.adapter.ReviewAdapter
 import com.agartha.didik.data.ReviewViewModel
 import com.agartha.didik.databinding.FragmentProfileBinding
 
+/**
+ * Fragment untuk menampilkan profil user dan riwayat review yang pernah dibuat oleh user tersebut.
+ */
 class ProfileFragment : Fragment() {
 
     private var _binding: FragmentProfileBinding? = null
@@ -30,33 +33,32 @@ class ProfileFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Ambil nama user yang login
+        // 1. Mengambil nama user dari SharedPreferences (data sesi login)
         val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val myName = sharedPref.getString("user_name", "Nadilah Nusa") ?: "Nadilah Nusa"
 
-        // Tampilkan nama di header profile
+        // Tampilkan nama di UI profil
         binding.tvProfileName.text = myName
 
-        // 2. Hubungkan ke ViewModel yang SAMA
+        // 2. Inisialisasi ViewModel untuk mengambil data review
         viewModel = ViewModelProvider(requireActivity())[ReviewViewModel::class.java]
 
-        // 3. Setup RecyclerView Riwayat
+        // 3. Mengatur layout daftar riwayat (RecyclerView)
         binding.rvMyHistory.layoutManager = LinearLayoutManager(context)
 
-        // 4. Pantau data dan FILTER berdasarkan nama
+        // 4. Observasi data review: Filter hanya review milik user yang sedang login
         viewModel.reviews.observe(viewLifecycleOwner) { allReviews ->
-            // Kita cuma ambil review yang reviewerName-nya sama dengan nama kita
             val myHistory = allReviews.filter { it.reviewerName == myName }
 
             if (myHistory.isNotEmpty()) {
                 binding.rvMyHistory.visibility = View.VISIBLE
                 binding.layoutEmptyProfile.visibility = View.GONE
                 
+                // Menampilkan riwayat review ke dalam adapter
                 binding.rvMyHistory.adapter = ReviewAdapter(myHistory) { selectedReview ->
-                    // Apa yang terjadi pas kartu di-klik?
+                    // Jika salah satu review diklik, tampilkan detailnya
                     val detailFragment = DetailReviewFragment()
 
-                    // Kirim data pake Bundle
                     val bundle = Bundle()
                     bundle.putString("company", selectedReview.companyName)
                     bundle.putString("position", selectedReview.position)
@@ -72,22 +74,22 @@ class ProfileFragment : Fragment() {
                         .commit()
                 }
             } else {
+                // Tampilan jika user belum pernah menulis review
                 binding.rvMyHistory.visibility = View.GONE
                 binding.layoutEmptyProfile.visibility = View.VISIBLE
             }
         }
 
-        // 5. Logika Tombol Logout
+        // 5. Logika Tombol Keluar (Logout)
         binding.btnLogout.setOnClickListener {
-            // A. Hapus data di SharedPreferences
+            // Menghapus sesi login di SharedPreferences
             val editor = sharedPref.edit()
-            editor.remove("user_name") // Hapus session login saja
+            editor.remove("user_name") 
             editor.apply()
 
-            // B. Pindah ke LoginFragment (Sesuai arsitektur Fragment saat ini)
+            // Kembali ke halaman Login dan hapus riwayat navigasi agar tidak bisa di-back ke profil
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, LoginFragment())
-                // Hapus semua stack back agar tidak bisa balik ke Profile lagi dengan tombol back
                 .apply {
                     for (i in 0 until parentFragmentManager.backStackEntryCount) {
                         parentFragmentManager.popBackStack()
@@ -95,13 +97,11 @@ class ProfileFragment : Fragment() {
                 }
                 .commit()
 
-            // C. Kasih notifikasi dikit biar sopan
             Toast.makeText(requireContext(), "Berhasil keluar. Sampai jumpa!", Toast.LENGTH_SHORT).show()
         }
 
-        // 6. Logika Tombol Panah Back
+        // 6. Logika Tombol Kembali (Back)
         binding.ivBack.setOnClickListener {
-            // Balik ke fragment sebelumnya (Dashboard)
             parentFragmentManager.popBackStack()
         }
     }

@@ -14,12 +14,16 @@ import com.agartha.didik.adapter.ReviewAdapter
 import com.agartha.didik.data.ReviewViewModel
 import com.agartha.didik.databinding.FragmentDashboardBinding
 
+/**
+ * Fragment utama yang menampilkan daftar review dari semua user (Beranda/Dashboard).
+ */
 class DashboardFragment : Fragment() {
 
+    // View Binding untuk mengakses komponen UI tanpa findViewById
     private var _binding: FragmentDashboardBinding? = null
     private val binding get() = _binding!!
 
-    // Inisialisasi ViewModel
+    // ViewModel untuk mengelola data review secara reaktif
     private lateinit var viewModel: ReviewViewModel
 
     override fun onCreateView(
@@ -34,31 +38,30 @@ class DashboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 1. Setup UI Dasar (Greeting dari SharedPreferences)
+        // 1. Inisialisasi SharedPreferences untuk mengambil nama user yang login
         val sharedPref = requireActivity().getSharedPreferences("UserPrefs", Context.MODE_PRIVATE)
         val namaUser = sharedPref.getString("user_name", "User")
         binding.tvGreeting.text = "Halo, $namaUser! 👋"
 
-        // 2. Setup RecyclerView (Layout Manager-nya dulu)
+        // 2. Konfigurasi RecyclerView dengan LayoutManager (Linear/Daftar menurun)
         binding.rvReview.layoutManager = LinearLayoutManager(context)
 
-        // 3. Hubungkan ke ViewModel (Gudang Data)
+        // 3. Menghubungkan Fragment dengan ViewModel
         viewModel = ViewModelProvider(requireActivity())[ReviewViewModel::class.java]
 
-        // 4. Pantau (Observe) perubahan data di ViewModel
+        // 4. Observasi data dari ViewModel. Jika data review berubah, UI akan otomatis update.
         viewModel.reviews.observe(viewLifecycleOwner) { list ->
             if (list.isEmpty()) {
                 binding.rvReview.visibility = View.GONE
-                // binding.layoutEmpty.visibility = View.VISIBLE // Sesuaikan ID di XML-mu ya
             } else {
                 binding.rvReview.visibility = View.VISIBLE
-                // binding.layoutEmpty.visibility = View.GONE
                 
+                // Set Adapter untuk menampilkan data ke RecyclerView
                 binding.rvReview.adapter = ReviewAdapter(list) { selectedReview ->
-                    // Apa yang terjadi pas kartu di-klik?
+                    // Logika ketika salah satu item review diklik
                     val detailFragment = DetailReviewFragment()
 
-                    // Kirim data pake Bundle
+                    // Membungkus data review ke dalam Bundle untuk dikirim ke DetailFragment
                     val bundle = Bundle()
                     bundle.putString("company", selectedReview.companyName)
                     bundle.putString("position", selectedReview.position)
@@ -68,6 +71,7 @@ class DashboardFragment : Fragment() {
                     bundle.putString("reviewer", selectedReview.reviewerName)
                     detailFragment.arguments = bundle
 
+                    // Berpindah ke Fragment Detail
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.fragment_container, detailFragment)
                         .addToBackStack(null)
@@ -76,7 +80,7 @@ class DashboardFragment : Fragment() {
             }
         }
 
-        // 5. Logika Navigasi (Tombol-tombol)
+        // 5. Navigasi ke halaman Tambah Review (FAB)
         binding.fabAddReview.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, FormReviewFragment())
@@ -84,6 +88,7 @@ class DashboardFragment : Fragment() {
                 .commit()
         }
 
+        // 6. Navigasi ke halaman Profil User
         binding.ivProfile.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, ProfileFragment())
@@ -94,6 +99,7 @@ class DashboardFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        // Membersihkan binding untuk menghindari memory leak
         _binding = null
     }
 }
