@@ -59,7 +59,6 @@ class FormReviewFragment : Fragment() {
                     id = (0..1000).random(),
                     companyName = company,
                     position = position,
-                    category = "Tech", // Default category
                     reviewerName = reviewerName,
                     jobDesc = jobDesc,
                     reviewText = reviewText,

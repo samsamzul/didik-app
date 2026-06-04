@@ -38,10 +38,7 @@ class ReviewAdapter(
         holder.binding.tvCompany.text = review.companyName
         holder.binding.tvPosition.text = review.position
         holder.binding.ratingBar.rating = review.rating
-        holder.binding.tvReviewerName.text = "by ${review.reviewerName}"
-        
-        // For search/dashboard summary, use first part of review text
-        holder.binding.tvReviewSummary.text = review.reviewText.take(40) + if (review.reviewText.length > 40) "..." else ""
+        holder.binding.tvReviewerName.text = review.reviewerName
 
         // Menangani aksi klik pada item
         holder.itemView.setOnClickListener {

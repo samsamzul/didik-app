@@ -17,113 +17,61 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="50dp">
+            android:paddingTop="50dp"
+            android:paddingLeft="25dp"
+            android:paddingRight="25dp">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="45dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="24dp"
-                android:background="#F5F5F5"
-                android:padding="8dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:background="@drawable/bg_circle"
                 android:src="@drawable/ic_profile"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:shapeAppearanceOverlay="@style/CircleImage"
-                app:tint="@color/brand_orange" />
-
-            <TextView
-                android:id="@+id/tvGreetingLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="Good Morning,"
-                android:fontFamily="@font/poppins"
-                android:textSize="14sp"
-                android:textColor="#9E9E9E"
-                app:layout_constraintTop_toTopOf="@id/ivProfile"
-                app:layout_constraintStart_toEndOf="@id/ivProfile" />
+                app:shapeAppearanceOverlay="@style/CircleImage" />
 
             <TextView
                 android:id="@+id/tvGreeting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nadilah Nusa"
+                android:layout_marginStart="12dp"
+                android:text="@string/tvGreeting"
                 android:fontFamily="@font/poppins_bold"
                 android:textSize="18sp"
-                android:textColor="#121212"
-                app:layout_constraintTop_toBottomOf="@id/tvGreetingLabel"
-                app:layout_constraintStart_toStartOf="@id/tvGreetingLabel" />
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginEnd="24dp"
-                android:src="@android:drawable/ic_popup_reminder"
-                app:layout_constraintBottom_toBottomOf="@id/ivProfile"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="#FF6B00"
                 app:layout_constraintTop_toTopOf="@id/ivProfile"
-                app:tint="#121212" />
+                app:layout_constraintBottom_toBottomOf="@id/ivProfile"
+                app:layout_constraintStart_toEndOf="@id/ivProfile" />
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/cvSearch"
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:layout_marginHorizontal="24dp"
-                android:layout_marginTop="32dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="2dp"
-                app:strokeWidth="0dp"
-                app:layout_constraintTop_toBottomOf="@id/ivProfile">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/ic_search"
-                        app:tint="#9E9E9E" />
-
-                    <EditText
-                        android:id="@+id/etSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@android:color/transparent"
-                        android:fontFamily="@font/poppins"
-                        android:hint="Search company or position"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="12dp"
-                        android:textSize="14sp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/tvLatestReviewLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:layout_marginStart="24dp"
-                android:text="Latest Reviews"
-                android:fontFamily="@font/poppins_bold"
-                android:textSize="18sp"
-                android:textColor="#121212"
-                app:layout_constraintTop_toBottomOf="@id/cvSearch"
-                app:layout_constraintStart_toStartOf="parent" />
+            <EditText
+                android:id="@+id/etSearch"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="28dp"
+                android:background="@drawable/bg_input_rounded"
+                android:drawableStart="@android:drawable/ic_menu_search"
+                android:drawablePadding="12dp"
+                android:fontFamily="@font/poppins"
+                android:hint="@string/etSearch"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:textSize="14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/ivProfile" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rvReview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:paddingBottom="80dp"
-                android:clipToPadding="false"
-                app:layout_constraintTop_toBottomOf="@id/tvLatestReviewLabel"
-                tools:itemCount="3"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@id/etSearch"
+                app:layout_constraintVertical_bias="0.0"
+                tools:itemCount="2"
+                tools:layout_editor_absoluteX="25dp"
                 tools:listitem="@layout/item_review" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
