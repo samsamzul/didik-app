@@ -15,10 +15,10 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/ivLogo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:background="#0052FF"
-            android:padding="8dp"
+            android:padding="12dp"
             android:src="@drawable/ic_company"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -26,76 +26,68 @@
             app:tint="#FFFFFF" />
 
         <TextView
-            android:id="@+id/tvTitle"
+            android:id="@+id/tvCompany"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="UIUX Design Intern"
+            android:text="Google"
             android:textColor="#121212"
             android:textSize="16sp"
-            app:layout_constraintEnd_toStartOf="@id/tvRating"
+            app:layout_constraintEnd_toStartOf="@id/btnReview"
             app:layout_constraintStart_toEndOf="@id/ivLogo"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tvRating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_bold"
-            android:text="★ 4.8"
-            android:textColor="#FF6B00"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/tvCompany"
+            android:id="@+id/tvRole"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
-            android:text="Tokopedia - Jakarta, ID"
+            android:text="UI/UX Intern"
             android:textColor="#9E9E9E"
             android:textSize="13sp"
-            app:layout_constraintEnd_toEndOf="@id/tvTitle"
-            app:layout_constraintStart_toStartOf="@id/tvTitle"
-            app:layout_constraintTop_toBottomOf="@id/tvTitle" />
-
-        <TextView
-            android:id="@+id/tvDescription"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:ellipsize="end"
-            android:fontFamily="@font/poppins"
-            android:maxLines="2"
-            android:text="Kolaborasi dengan tim produk untuk merancang user flow, wireframe, dan high-fidelity"
-            android:textColor="#9E9E9E"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/tvCompany"
             app:layout_constraintStart_toStartOf="@id/tvCompany"
             app:layout_constraintTop_toBottomOf="@id/tvCompany" />
 
         <TextView
-            android:id="@+id/tvTime"
+            android:id="@+id/btnReview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_pill_soft"
             android:fontFamily="@font/poppins_bold"
-            android:text="3 DAYS AGO"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:text="REVIEW"
+            android:textColor="#FF6B00"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvAppliedDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins"
+            android:text="Applied on Sep 12, 2025"
             android:textColor="#9E9E9E"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@id/tvDescription"
-            app:layout_constraintTop_toBottomOf="@id/tvDescription" />
-
-        <ImageView
-            android:id="@+id/ivSave"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/ic_history"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+
+        <TextView
+            android:id="@+id/tvDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Hapus"
+            android:textColor="#FF3B30"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@id/tvAppliedDate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="#121212" />
+            app:layout_constraintTop_toTopOf="@id/tvAppliedDate" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

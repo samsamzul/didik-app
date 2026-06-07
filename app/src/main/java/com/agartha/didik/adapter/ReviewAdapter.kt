@@ -39,6 +39,8 @@ class ReviewAdapter(
         holder.binding.tvPosition.text = review.position
         holder.binding.ratingBar.rating = review.rating
         holder.binding.tvReviewerName.text = review.reviewerName
+        holder.binding.tvReviewTitle.text = review.jobDesc
+        holder.binding.tvReviewContent.text = review.reviewText
 
         // Menangani aksi klik pada item
         holder.itemView.setOnClickListener {

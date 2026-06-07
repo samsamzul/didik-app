@@ -4,70 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:padding="24dp">
+    android:background="#F5F5F5"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp">
 
-    <TextView
-        android:id="@+id/tvSearchTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppins_bold"
-        android:text="Search Reviews"
-        android:textColor="#FF6B00"
-        android:textSize="22sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/etSearch"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cvSearchExplore"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/bg_input_rounded"
-        android:drawableStart="@drawable/ic_search"
-        android:drawablePadding="12dp"
-        android:fontFamily="@font/poppins"
-        android:hint="Search by company or position..."
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:textSize="14sp"
-        app:layout_constraintTop_toBottomOf="@id/tvSearchTitle" />
+        android:layout_height="50dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#FF6B00"
+        app:strokeWidth="1dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                app:tint="#FF6B00" />
+
+            <EditText
+                android:id="@+id/etSearchExplore"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/poppins"
+                android:hint="search company"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <HorizontalScrollView
+        android:id="@+id/svChipsExplore"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/cvSearchExplore">
+
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/cgExploreFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:singleSelection="true">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipAll"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="All"
+                android:checked="true" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRemote"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Remote" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipDuration"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Duration" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chipRole"
+                style="@style/Widget.Material3.Chip.Filter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Role" />
+        </com.google.android.material.chip.ChipGroup>
+    </HorizontalScrollView>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvSearchResults"
+        android:id="@+id/rvInternships"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSearch"
-        tools:listitem="@layout/item_review" />
-
-    <LinearLayout
-        android:id="@+id/layoutEmptySearch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/etSearch">
-
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:alpha="0.3"
-            android:src="@drawable/ic_search"
-            app:tint="#FF6B00" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:fontFamily="@font/poppins"
-            android:text="No results found"
-            android:textColor="#999999" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@id/svChipsExplore"
+        tools:listitem="@layout/item_internship_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

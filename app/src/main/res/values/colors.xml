@@ -8,4 +8,8 @@
     <color name="hint_grey">#9E9E9E</color>
     <color name="star_active">#FF6B00</color>
     <color name="star_inactive">#E0E0E0</color>
+    <color name="soft_pink">#FEE2E2</color>
+    <color name="error_red">#FF3B30</color>
+    <color name="apply_blue">#0052FF</color>
+    <color name="border_grey">#E0E0E0</color>
 </resources>
