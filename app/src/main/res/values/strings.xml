@@ -1,17 +1,38 @@
 <resources>
     <string name="app_name">didik</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="btnLogin">Login</string>
-    <string name="plcPassword">Enter your password</string>
-    <string name="plcUsername">Enter your username</string>
-    <string name="tEmail">Email</string>
-    <string name="tPassword">Password</string>
+
     <string name="tLogin">Login</string>
+    <string name="tEmail">Email</string>
+    <string name="plcUsername">Enter your email address</string>
+    <string name="tPassword">Password</string>
+    <string name="plcPassword">Enter your password</string>
+    <string name="btnLogin">Login</string>
+    <string name="tRegister">Daftar Akun</string>
+    <string name="tFullName">Nama Lengkap</string>
+    <string name="plcFullName">Masukkan nama lengkap Anda</string>
+    <string name="tInstansi">Nama Instansi</string>
+    <string name="plcInstansi">Masukkan nama sekolah/kampus</string>
+    <string name="btnRegister">Daftar</string>
     <string name="btnStart">Mulai Berkontribusi</string>
     <string name="tvDesc">Baca ulasan jujur dari mahasiswa dan temukan tempat magang dengan kualitas mentor terbaik.</string>
     <string name="tvTitle">Dari Mahasiswa,\nUntuk Mahasiswa.</string>
     <string name="tvGreeting">Halo, Nadilah! 👋</string>
     <string name="etSearch">Cari perusahaan atau posisi...</string>
 
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.
+    </string>
 </resources>

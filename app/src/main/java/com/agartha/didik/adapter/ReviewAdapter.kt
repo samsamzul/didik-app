@@ -3,8 +3,8 @@ package com.agartha.didik.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.agartha.didik.data.ReviewModel
 import com.agartha.didik.databinding.ItemReviewBinding
+import com.agartha.didik.ui.review.ReviewModel
 
 /**
  * Adapter untuk mengelola dan menampilkan daftar review dalam RecyclerView.
