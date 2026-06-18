@@ -45,7 +45,8 @@ class AddReviewActivity : AppCompatActivity() {
                 ment = intent.getIntExtra("EXTRA_MENTORSHIP", 0),
                 cult = intent.getIntExtra("EXTRA_CULTURE", 0),
                 pros = intent.getStringExtra("EXTRA_PROS") ?: "",
-                cons = intent.getStringExtra("EXTRA_CONS") ?: ""
+                cons = intent.getStringExtra("EXTRA_CONS") ?: "",
+                anonim = intent.getBooleanExtra("EXTRA_IS_ANONIM", false)
             )
         } else {
             // Jika bukan mode edit, pastikan state form bersih tapi bawa ID perusahaan jika ada

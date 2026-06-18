@@ -20,12 +20,13 @@ class ReviewRepository(private val ulasanDao: UlasanDao) {
                 jobDesc = item.ulasan.deskripsiKerja,
                 reviewText = item.ulasan.teksUlasan,
                 rating = (item.ulasan.ratingWorkload + item.ulasan.ratingMentorship + item.ulasan.ratingCulture) / 3.0f,
-                reviewerName = item.namaUser,
+                reviewerName = if (item.ulasan.isAnonim) "Anonim" else item.namaUser,
                 ratingWorkload = item.ulasan.ratingWorkload,
                 ratingMentorship = item.ulasan.ratingMentorship,
                 ratingCulture = item.ulasan.ratingCulture,
                 pros = item.ulasan.poinKelebihan,
                 cons = item.ulasan.poinKekurangan,
+                isAnonim = item.ulasan.isAnonim,
                 location = item.lokasi
             )
         }

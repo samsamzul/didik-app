@@ -115,7 +115,7 @@ class HistoryFragment : Fragment() {
                         ilmuDidapat = "",
                         poinKelebihan = review.pros,
                         poinKekurangan = review.cons,
-                        isAnonim = false
+                        isAnonim = review.isAnonim
                     )
                     viewModel.deleteReview(ulasanEntity)
                 },
@@ -132,6 +132,7 @@ class HistoryFragment : Fragment() {
                         putExtra("EXTRA_CULTURE", review.ratingCulture)
                         putExtra("EXTRA_PROS", review.pros)
                         putExtra("EXTRA_CONS", review.cons)
+                        putExtra("EXTRA_IS_ANONIM", review.isAnonim)
                     }
                     startActivity(intent)
                 }

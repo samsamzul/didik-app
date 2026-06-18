@@ -81,6 +81,7 @@ class CompanyDetailActivity : AppCompatActivity() {
                         putExtra("EXTRA_CULTURE", review.ratingCulture)
                         putExtra("EXTRA_PROS", review.pros)
                         putExtra("EXTRA_CONS", review.cons)
+                        putExtra("EXTRA_IS_ANONIM", review.isAnonim)
                     }
                     startActivity(editIntent)
                 },
@@ -99,7 +100,7 @@ class CompanyDetailActivity : AppCompatActivity() {
                         ilmuDidapat = "", // Placeholder
                         poinKelebihan = review.pros,
                         poinKekurangan = review.cons,
-                        isAnonim = false
+                        isAnonim = review.isAnonim
                     )
                     viewModel.deleteReview(ulasanEntity)
                     Toast.makeText(this, "Review deleted", Toast.LENGTH_SHORT).show()

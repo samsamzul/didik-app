@@ -20,7 +20,6 @@ class FormReviewFragmentFinal3 : Fragment() {
     private val binding get() = _binding!!
     private lateinit var preferenceManager: PreferenceManager
 
-    // Shared ViewModel antar Fragment dalam satu Activity
     private val viewModel: ReviewViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -38,18 +37,13 @@ class FormReviewFragmentFinal3 : Fragment() {
 
         preferenceManager = PreferenceManager(requireContext())
         
-        // Tampilkan rangkuman ulasan dari data di ViewModel
         setupReviewSummary()
+
+        // Sync anonymous toggle with viewModel state
+        binding.switchAnonim.isChecked = viewModel.tempIsAnonim
 
         if (viewModel.editingReviewId != null) {
             binding.btnPublish.text = "Update Review"
-        }
-
-        // Observasi error dari ViewModel
-        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
-            if (errorMessage != null) {
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
-            }
         }
 
         binding.btnPublish.setOnClickListener {
@@ -64,18 +58,15 @@ class FormReviewFragmentFinal3 : Fragment() {
     private fun setupReviewSummary() {
         with(binding) {
             tvSummaryPosition.text = viewModel.tempPosition
-            tvSummaryCompany.text = "${viewModel.tempCompanyName} - Summer 2024"
+            tvSummaryCompany.text = "${viewModel.tempCompanyName} - Internship"
             
-            // Set ratings yang dikumpulkan dari Step 1
             rbCulture.rating = viewModel.tempRatingCulture.toFloat()
             rbWorkload.rating = viewModel.tempRatingWorkload.toFloat()
             rbMentorship.rating = viewModel.tempRatingMentorship.toFloat()
 
-            // Set Pro & Kontra dari Step 2 (ditambah bullet point agar rapi)
             tvSummaryPro.text = formatToBulletList(viewModel.tempPro)
             tvSummaryKontra.text = formatToBulletList(viewModel.tempKontra)
 
-            // Tampilkan Skills sebagai Chips
             cgSummarySkills.removeAllViews()
             viewModel.tempSkills.forEach { skill ->
                 val chip = Chip(requireContext()).apply {
@@ -105,11 +96,11 @@ class FormReviewFragmentFinal3 : Fragment() {
             return
         }
 
-        // Buat entity untuk disimpan ke database
+        val isAnonim = binding.switchAnonim.isChecked
+
         val reviewData = UlasanEntity(
             id = viewModel.editingReviewId ?: 0,
             userId = userId,
-            // Pastikan perusahaanId tidak 0 agar join tidak gagal
             perusahaanId = if (viewModel.tempPerusahaanId != 0) viewModel.tempPerusahaanId else 1,
             namaPosisi = viewModel.tempPosition,
             deskripsiKerja = viewModel.tempReviewText,
@@ -120,35 +111,18 @@ class FormReviewFragmentFinal3 : Fragment() {
             ilmuDidapat = viewModel.tempSkills.joinToString(", "),
             poinKelebihan = viewModel.tempPro,
             poinKekurangan = viewModel.tempKontra,
-            isAnonim = binding.switchAnonim.isChecked
+            isAnonim = isAnonim
         )
 
-        // Simpan via ViewModel sesuai mode (Insert / Update)
         if (viewModel.editingReviewId != null) {
             viewModel.updateReview(reviewData)
+            Toast.makeText(requireContext(), "Ulasan berhasil diperbarui!", Toast.LENGTH_SHORT).show()
         } else {
             viewModel.insertReview(reviewData)
+            Toast.makeText(requireContext(), "Ulasan berhasil dikirim!", Toast.LENGTH_SHORT).show()
         }
         
-        Toast.makeText(requireContext(), "Memproses ulasan...", Toast.LENGTH_SHORT).show()
-        
-        view?.postDelayed({
-            if (viewModel.error.value == null) {
-                Toast.makeText(requireContext(), "Ulasan Berhasil Simpan!", Toast.LENGTH_SHORT).show()
-                // Cek apakah fragment berada di dalam activity yang menampung Bottom Navigation
-                val mainActivity = activity as? com.agartha.didik.ui.main.MainActivity
-                if (mainActivity != null) {
-                    // Bersihkan backstack navigasi form review
-                    parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-                    
-                    // Pindah ke tab History (Application)
-                    val bottomNav = mainActivity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
-                    bottomNav.selectedItemId = R.id.nav_application
-                } else {
-                    activity?.finish()
-                }
-            }
-        }, 500)
+        activity?.finish()
     }
 
     override fun onDestroyView() {
