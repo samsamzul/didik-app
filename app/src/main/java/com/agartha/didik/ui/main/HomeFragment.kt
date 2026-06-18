@@ -1,5 +1,6 @@
 package com.agartha.didik.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,7 @@ import com.agartha.didik.R
 import com.agartha.didik.databinding.FragmentHomeBinding
 import com.agartha.didik.adapter.ReviewAdapter
 import com.agartha.didik.ui.ViewModelFactory
-import com.agartha.didik.ui.company.CompanyDetailFragment
+import com.agartha.didik.ui.company.CompanyDetailActivity
 import com.agartha.didik.ui.review.ReviewModel
 import com.agartha.didik.ui.review.ReviewViewModel
 import com.agartha.didik.utils.PreferenceManager
@@ -70,17 +71,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigateToDetail(review: ReviewModel) {
-        val fragment = CompanyDetailFragment().apply {
-            arguments = Bundle().apply {
-                putString("company", review.companyName)
-                putString("position", review.position)
-                putString("category", review.category)
-            }
+        val intent = Intent(requireContext(), CompanyDetailActivity::class.java).apply {
+            putExtra("company", review.companyName)
+            putExtra("position", review.position)
+            putExtra("category", review.category)
         }
-        parentFragmentManager.beginTransaction()
-            .replace(R.id.fragment_container, fragment)
-            .addToBackStack(null)
-            .commit()
+        startActivity(intent)
     }
 
     override fun onDestroyView() {

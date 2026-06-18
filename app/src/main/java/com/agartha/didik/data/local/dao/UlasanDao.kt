@@ -47,6 +47,7 @@ interface UlasanDao {
         SELECT 
             u.*, 
             p.nama_perusahaan, 
+            p.lokasi,
             k.nama_kategori as kategori_nama, 
             us.nama_lengkap as user_nama 
         FROM ulasan u
@@ -70,6 +71,7 @@ interface UlasanDao {
 data class UlasanLengkap(
     @Embedded val ulasan: UlasanEntity,
     @ColumnInfo(name = "nama_perusahaan") val namaPerusahaan: String,
+    @ColumnInfo(name = "lokasi") val lokasi: String,
     @ColumnInfo(name = "kategori_nama") val namaKategori: String,
     @ColumnInfo(name = "user_nama") val namaUser: String
 )

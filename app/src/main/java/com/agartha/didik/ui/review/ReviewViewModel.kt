@@ -16,7 +16,11 @@ data class ReviewModel(
     val jobDesc: String,
     val reviewText: String,
     val rating: Float,
-    val reviewerName: String
+    val reviewerName: String,
+    val ratingWorkload: Int = 0,
+    val ratingMentorship: Int = 0,
+    val ratingCulture: Int = 0,
+    val location: String = "Jakarta"
 )
 
 class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewModel() {

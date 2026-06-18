@@ -11,12 +11,14 @@ import com.agartha.didik.R
 import com.agartha.didik.data.local.entity.UlasanEntity
 import com.agartha.didik.databinding.FragmentFormReviewFinal3Binding
 import com.agartha.didik.ui.ViewModelFactory
+import com.agartha.didik.utils.PreferenceManager
 import com.google.android.material.chip.Chip
 
 class FormReviewFragmentFinal3 : Fragment() {
 
     private var _binding: FragmentFormReviewFinal3Binding? = null
     private val binding get() = _binding!!
+    private lateinit var preferenceManager: PreferenceManager
 
     // Shared ViewModel antar Fragment dalam satu Activity
     private val viewModel: ReviewViewModel by activityViewModels {
@@ -34,6 +36,8 @@ class FormReviewFragmentFinal3 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        preferenceManager = PreferenceManager(requireContext())
+        
         // Tampilkan rangkuman ulasan dari data di ViewModel
         setupReviewSummary()
 
@@ -84,9 +88,15 @@ class FormReviewFragmentFinal3 : Fragment() {
     }
 
     private fun publishFinalReview() {
+        val userId = preferenceManager.getUserId()
+        if (userId == -1) {
+            Toast.makeText(requireContext(), "Sesi berakhir, silakan login kembali", Toast.LENGTH_SHORT).show()
+            return
+        }
+
         // Buat entity untuk disimpan ke database
         val newReview = UlasanEntity(
-            userId = 1, // Placeholder: seharusnya ID user yang sedang login
+            userId = userId,
             perusahaanId = 1, // Placeholder: seharusnya ID perusahaan yang dipilih
             namaPosisi = viewModel.tempPosition,
             deskripsiKerja = viewModel.tempReviewText,
@@ -105,8 +115,17 @@ class FormReviewFragmentFinal3 : Fragment() {
         
         Toast.makeText(requireContext(), "Ulasan berhasil dikirim!", Toast.LENGTH_SHORT).show()
         
-        // Kembali ke Home atau tutup activity
-        activity?.finish()
+        // Cek apakah fragment berada di dalam activity yang menampung Bottom Navigation
+        val mainActivity = activity as? com.agartha.didik.ui.main.MainActivity
+        if (mainActivity != null) {
+            // Jika di MainActivity, kembali ke Home
+            parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+            // Opsional: Select Home menu di bottom navigation jika perlu
+            // mainActivity.binding.bottomNavigation.selectedItemId = R.id.nav_home
+        } else {
+            // Jika di activity terpisah (seperti AddReviewActivity), tutup activity-nya
+            activity?.finish()
+        }
     }
 
     override fun onDestroyView() {

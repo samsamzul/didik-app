@@ -34,6 +34,11 @@ class ProfilePageFragment : Fragment() {
         setupAction()
     }
 
+    override fun onResume() {
+        super.onResume()
+        setupProfileData()
+    }
+
     private fun setupProfileData() {
         val userName = preferenceManager.getUserName()
         if (!userName.isNullOrEmpty()) {
@@ -42,6 +47,11 @@ class ProfilePageFragment : Fragment() {
     }
 
     private fun setupAction() {
+        binding.cvEditProfile.setOnClickListener {
+            val intent = Intent(requireContext(), EditProfileActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.btnLogout.setOnClickListener {
             preferenceManager.clearSession()
             Toast.makeText(requireContext(), "Berhasil Keluar", Toast.LENGTH_SHORT).show()

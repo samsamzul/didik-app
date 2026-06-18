@@ -43,7 +43,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".ui.company.DetailPerusahaanActivity"
+            android:name=".ui.company.CompanyDetailActivity"
             android:exported="false" />
 
         <activity

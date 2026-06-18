@@ -23,7 +23,11 @@ class ReviewRepository(private val ulasanDao: UlasanDao) {
                 jobDesc = item.ulasan.deskripsiKerja,
                 reviewText = item.ulasan.teksUlasan,
                 rating = (item.ulasan.ratingWorkload + item.ulasan.ratingMentorship + item.ulasan.ratingCulture) / 3.0f,
-                reviewerName = item.namaUser
+                reviewerName = item.namaUser,
+                ratingWorkload = item.ulasan.ratingWorkload,
+                ratingMentorship = item.ulasan.ratingMentorship,
+                ratingCulture = item.ulasan.ratingCulture,
+                location = item.lokasi
             )
         }
     }

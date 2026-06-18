@@ -21,6 +21,9 @@ class ViewModelFactory private constructor(
             modelClass.isAssignableFrom(com.agartha.didik.ui.review.ReviewViewModel::class.java) -> {
                 com.agartha.didik.ui.review.ReviewViewModel(reviewRepository) as T
             }
+            modelClass.isAssignableFrom(com.agartha.didik.ui.profile.EditProfileViewModel::class.java) -> {
+                com.agartha.didik.ui.profile.EditProfileViewModel(userRepository) as T
+            }
             else -> throw IllegalArgumentException("ViewModel Tidak Dikenal: " + modelClass.name)
         }
     }

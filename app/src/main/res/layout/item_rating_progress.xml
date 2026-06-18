@@ -24,7 +24,7 @@
             android:layout_alignParentEnd="true"
             android:fontFamily="@font/poppins_bold"
             android:text="4.4/5.0"
-            android:textColor="#0052FF"
+            android:textColor="@color/brand_orange"
             android:textSize="14sp" />
     </RelativeLayout>
 
@@ -35,6 +35,7 @@
         android:layout_height="8dp"
         android:layout_marginTop="8dp"
         android:progress="88"
-        android:progressDrawable="@drawable/bg_progress_blue" />
+        android:progressTint="@color/brand_orange"
+        android:progressBackgroundTint="#E0E0E0" />
 
 </LinearLayout>
