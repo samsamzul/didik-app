@@ -4,6 +4,8 @@
     <color name="pure_white">#FFFFFF</color>
     <color name="deep_black">#121212</color>
 
+    <color name="orange_light">#FFF4EB</color>
+
     <color name="soft_grey">#F5F5F5</color>
     <color name="hint_grey">#9E9E9E</color>
     <color name="star_active">#FF6B00</color>

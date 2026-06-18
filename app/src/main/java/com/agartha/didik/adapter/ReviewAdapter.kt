@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.agartha.didik.databinding.ItemReviewBinding
 import com.agartha.didik.ui.review.ReviewModel
+import com.agartha.didik.R
 
 /**
  * Adapter untuk mengelola dan menampilkan daftar review dalam RecyclerView.
@@ -37,7 +38,12 @@ class ReviewAdapter(
         
         // Mengisi data ke dalam komponen UI
         holder.binding.tvReviewerName.text = review.reviewerName
-        holder.binding.tvPositionAndCompany.text = "${review.position} @ ${review.companyName}"
+        holder.binding.tvPositionAndCompany.text =
+            holder.itemView.context.getString(
+                R.string.position_company,
+                review.position,
+                review.companyName
+            )
         holder.binding.ratingBar.rating = review.rating
         holder.binding.tvReviewTitle.text = review.jobDesc
         holder.binding.tvReviewContent.text = review.reviewText

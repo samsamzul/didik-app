@@ -19,12 +19,15 @@
     <string name="tvGreeting">Halo, Nadilah! 👋</string>
     <string name="etSearch">Cari perusahaan atau posisi...</string>
 
+    <string name="daftar_review">Daftar Review</string>
+    <string name="tambah_review">Tambah Review</string>
     <string name="action_review">REVIEW</string>
     <string name="action_delete">Hapus</string>
     <string name="label_applied_on">Applied on %1$s</string>
     <string name="content_desc_company_logo">Logo Perusahaan</string>
     <string name="label_rating_prefix">★ %1$s</string>
     <string name="label_days_ago">%1$d DAYS AGO</string>
+    <string name="position_company">%1$s @ %2$s</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
@@ -42,4 +45,27 @@
         molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
         bibendum, vel congue leo egestas.
     </string>
+
+    <string name="edit_review_title">Edit Review</string>
+    <string name="review_appear_info">This is how your review will appear</string>
+    <string name="review_feedback_info">Your feedback help other make informed career choices</string>
+    <string name="sample_position">Software Engineer Intern</string>
+    <string name="sample_company_info">TechCop Solution • Summer 2023</string>
+    <string name="label_culture">Culture</string>
+    <string name="label_workload">Workload</string>
+    <string name="label_mentorship">Mentorship</string>
+    <string name="label_pros">Pro</string>
+    <string name="sample_pros_text">• Lingkungan kerja yang positif\n• Saya mendapat banyak ilmu baru\n• Teman kerja yang sangat suportif</string>
+    <string name="label_cons">Kontra</string>
+    <string name="sample_cons_text">• Waktu kerja yang tidak teratur\n• Beberapa job desk tidak sesuai</string>
+    <string name="label_skills_gained">Skill yang didapat</string>
+    <string name="skill_figma">Figma</string>
+    <string name="skill_excel">Excel</string>
+    <string name="skill_word">Word</string>
+    <string name="skill_adobe_xd">Adobe XD</string>
+    <string name="label_send_anonymous">Kirim Sebagai Anonim</string>
+    <string name="desc_anonymous">Nama anda tidak akan muncul</string>
+    <string name="checkbox_anonymous">Kirim sebagai anonim untuk menghindari nama anda terlihat pada review</string>
+    <string name="btn_edit">Edit</string>
+    <string name="btn_publish">Publish Review</string>
 </resources>
