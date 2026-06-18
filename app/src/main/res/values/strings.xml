@@ -19,6 +19,13 @@
     <string name="tvGreeting">Halo, Nadilah! 👋</string>
     <string name="etSearch">Cari perusahaan atau posisi...</string>
 
+    <string name="action_review">REVIEW</string>
+    <string name="action_delete">Hapus</string>
+    <string name="label_applied_on">Applied on %1$s</string>
+    <string name="content_desc_company_logo">Logo Perusahaan</string>
+    <string name="label_rating_prefix">★ %1$s</string>
+    <string name="label_days_ago">%1$d DAYS AGO</string>
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="lorem_ipsum">

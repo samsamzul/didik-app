@@ -10,6 +10,8 @@ import kotlinx.coroutines.launch
 
 
 data class ReviewModel(
+    val reviewId: Int = 0,
+    val userId: Int,
     val companyName: String,
     val position: String,
     val category: String,
@@ -20,6 +22,8 @@ data class ReviewModel(
     val ratingWorkload: Int = 0,
     val ratingMentorship: Int = 0,
     val ratingCulture: Int = 0,
+    val pros: String = "",
+    val cons: String = "",
     val location: String = "Jakarta"
 )
 
@@ -29,6 +33,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
     val reviews: LiveData<List<ReviewModel>> get() = _reviews
 
     // State untuk Multi-step Form (Shared across Fragments)
+    var editingReviewId: Int? = null
     var tempCompanyName: String = ""
     var tempPosition: String = ""
     var tempReviewText: String = ""
@@ -48,10 +53,8 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
         loadReviewsFromDatabase()
     }
 
-    private fun loadReviewsFromDatabase() {
+    fun loadReviewsFromDatabase() {
         viewModelScope.launch {
-            // Kita akan ambil data asli dari Database via Repository
-            // dan memetakan (mapping) ke ReviewModel
             val reviewModels = reviewRepository.getAllReviewsWithDetails()
             _reviews.value = reviewModels
         }
@@ -60,7 +63,44 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
     fun insertReview(ulasan: UlasanEntity) {
         viewModelScope.launch {
             reviewRepository.createNewReview(ulasan)
-            loadReviewsFromDatabase() // Refresh data setelah simpan
+            loadReviewsFromDatabase()
         }
+    }
+
+    fun updateReview(ulasan: UlasanEntity) {
+        viewModelScope.launch {
+            reviewRepository.updateExistingReview(ulasan)
+            loadReviewsFromDatabase()
+        }
+    }
+
+    fun setReviewToEdit(
+        id: Int, company: String, pos: String, text: String, 
+        rating: Int, work: Int, ment: Int, cult: Int, pros: String, cons: String
+    ) {
+        editingReviewId = id
+        tempCompanyName = company
+        tempPosition = pos
+        tempReviewText = text
+        tempRating = rating
+        tempRatingWorkload = work
+        tempRatingMentorship = ment
+        tempRatingCulture = cult
+        tempPro = pros
+        tempKontra = cons
+    }
+
+    fun clearFormState() {
+        editingReviewId = null
+        tempCompanyName = ""
+        tempPosition = ""
+        tempReviewText = ""
+        tempRating = 0
+        tempRatingWorkload = 0
+        tempRatingMentorship = 0
+        tempRatingCulture = 0
+        tempPro = ""
+        tempKontra = ""
+        tempSkills = listOf()
     }
 }

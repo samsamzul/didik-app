@@ -16,7 +16,6 @@ class FormReviewFragment : Fragment() {
     private var _binding: FragmentFormReviewBinding? = null
     private val binding get() = _binding!!
 
-    // Menggunakan activityViewModels agar data tersimpan selama siklus hidup Activity (Shared ViewModel)
     private val viewModel: ReviewViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
@@ -31,6 +30,20 @@ class FormReviewFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // Pre-fill data jika dalam mode EDIT
+        if (viewModel.editingReviewId != null) {
+            binding.etCompanyName.setText(viewModel.tempCompanyName)
+            binding.etPosition.setText(viewModel.tempPosition)
+            binding.etReviewText.setText(viewModel.tempReviewText)
+            binding.rbReview.rating = viewModel.tempRating.toFloat()
+            binding.rbWorkload.rating = viewModel.tempRatingWorkload.toFloat()
+            binding.rbMentorship.rating = viewModel.tempRatingMentorship.toFloat()
+            binding.rbCulture.rating = viewModel.tempRatingCulture.toFloat()
+            
+            // Ubah teks tombol jika perlu
+            binding.btnSave.text = "Update & Next"
+        }
 
         binding.btnSave.setOnClickListener {
             saveToViewModel()
@@ -52,7 +65,6 @@ class FormReviewFragment : Fragment() {
             return
         }
 
-        // Simpan data ke Shared ViewModel agar bisa diakses di Fragment selanjutnya
         viewModel.tempCompanyName = companyName
         viewModel.tempPosition = position
         viewModel.tempReviewText = reviewText
@@ -61,7 +73,6 @@ class FormReviewFragment : Fragment() {
         viewModel.tempRatingMentorship = ratingMent
         viewModel.tempRatingCulture = ratingCulture
 
-        // Navigasi ke Step 2
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, FormReviewFragment2())
             .addToBackStack(null)

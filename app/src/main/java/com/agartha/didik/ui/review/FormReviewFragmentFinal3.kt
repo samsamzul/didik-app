@@ -41,6 +41,10 @@ class FormReviewFragmentFinal3 : Fragment() {
         // Tampilkan rangkuman ulasan dari data di ViewModel
         setupReviewSummary()
 
+        if (viewModel.editingReviewId != null) {
+            binding.btnPublish.text = "Update Review"
+        }
+
         binding.btnPublish.setOnClickListener {
             publishFinalReview()
         }
@@ -95,7 +99,8 @@ class FormReviewFragmentFinal3 : Fragment() {
         }
 
         // Buat entity untuk disimpan ke database
-        val newReview = UlasanEntity(
+        val reviewData = UlasanEntity(
+            id = viewModel.editingReviewId ?: 0,
             userId = userId,
             perusahaanId = 1, // Placeholder: seharusnya ID perusahaan yang dipilih
             namaPosisi = viewModel.tempPosition,
@@ -110,20 +115,20 @@ class FormReviewFragmentFinal3 : Fragment() {
             isAnonim = binding.switchAnonim.isChecked
         )
 
-        // Simpan via ViewModel
-        viewModel.insertReview(newReview)
-        
-        Toast.makeText(requireContext(), "Ulasan berhasil dikirim!", Toast.LENGTH_SHORT).show()
+        // Simpan via ViewModel sesuai mode (Insert / Update)
+        if (viewModel.editingReviewId != null) {
+            viewModel.updateReview(reviewData)
+            Toast.makeText(requireContext(), "Ulasan berhasil diperbarui!", Toast.LENGTH_SHORT).show()
+        } else {
+            viewModel.insertReview(reviewData)
+            Toast.makeText(requireContext(), "Ulasan berhasil dikirim!", Toast.LENGTH_SHORT).show()
+        }
         
         // Cek apakah fragment berada di dalam activity yang menampung Bottom Navigation
         val mainActivity = activity as? com.agartha.didik.ui.main.MainActivity
         if (mainActivity != null) {
-            // Jika di MainActivity, kembali ke Home
             parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-            // Opsional: Select Home menu di bottom navigation jika perlu
-            // mainActivity.binding.bottomNavigation.selectedItemId = R.id.nav_home
         } else {
-            // Jika di activity terpisah (seperti AddReviewActivity), tutup activity-nya
             activity?.finish()
         }
     }

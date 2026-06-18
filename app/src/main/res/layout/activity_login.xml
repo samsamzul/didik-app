@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF6B00">
+    android:background="@color/brand_orange">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -25,9 +25,8 @@
             android:fontFamily="@font/poppins_bold"
             android:gravity="center"
             android:text="@string/tLogin"
-            android:textColor="#FF6B00"
+            android:textColor="@color/brand_orange"
             android:textSize="30sp"
-            android:textStyle="bold"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -35,11 +34,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_light"
+            android:fontFamily="@font/poppins_bold"
             android:text="@string/tEmail"
-            android:textColor="#000000"
+            android:textColor="@color/deep_black"
             android:textSize="12sp"
-            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@id/tLogin" />
 
         <EditText
@@ -61,11 +59,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_light"
+            android:fontFamily="@font/poppins_bold"
             android:text="@string/tPassword"
-            android:textColor="#000000"
+            android:textColor="@color/deep_black"
             android:textSize="12sp"
-            android:textStyle="bold"
             app:layout_constraintTop_toBottomOf="@+id/etLoginEmail" />
 
         <EditText
@@ -82,16 +79,16 @@
             android:textSize="14sp"
             app:layout_constraintTop_toBottomOf="@+id/tPassword" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnLogin"
             android:layout_width="140dp"
-            android:layout_height="50dp"
+            android:layout_height="56dp"
             android:layout_marginTop="40dp"
-            android:backgroundTint="#FF6B00"
+            app:backgroundTint="@color/brand_orange"
             android:fontFamily="@font/poppins_bold"
             android:text="@string/btnLogin"
             android:textAllCaps="false"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/pure_white"
             android:textSize="18sp"
             app:cornerRadius="12dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -103,14 +100,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/poppins"
+            android:padding="8dp"
             android:text="Belum punya akun? Daftar di sini"
-            android:textColor="#777777"
+            android:textColor="@color/hint_grey"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btnLogin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

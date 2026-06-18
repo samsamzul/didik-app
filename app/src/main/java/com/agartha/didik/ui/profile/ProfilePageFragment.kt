@@ -7,8 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.agartha.didik.databinding.FragmentProfilePageBinding
+import com.agartha.didik.ui.ViewModelFactory
 import com.agartha.didik.ui.auth.LoginActivity
+import com.agartha.didik.ui.review.ReviewViewModel
 import com.agartha.didik.utils.PreferenceManager
 
 class ProfilePageFragment : Fragment() {
@@ -16,6 +19,10 @@ class ProfilePageFragment : Fragment() {
     private var _binding: FragmentProfilePageBinding? = null
     private val binding get() = _binding!!
     private lateinit var preferenceManager: PreferenceManager
+
+    private val reviewViewModel: ReviewViewModel by viewModels {
+        ViewModelFactory.getInstance(requireContext())
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,11 +39,21 @@ class ProfilePageFragment : Fragment() {
 
         setupProfileData()
         setupAction()
+        observeReviewData()
     }
 
     override fun onResume() {
         super.onResume()
         setupProfileData()
+        reviewViewModel.loadReviewsFromDatabase() // Refresh data saat balik ke profil
+    }
+
+    private fun observeReviewData() {
+        val currentUserId = preferenceManager.getUserId()
+        reviewViewModel.reviews.observe(viewLifecycleOwner) { reviews ->
+            val userReviewCount = reviews.count { it.userId == currentUserId }
+            binding.tvReviewCount.text = userReviewCount.toString()
+        }
     }
 
     private fun setupProfileData() {

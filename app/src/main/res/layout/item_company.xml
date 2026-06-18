@@ -4,6 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
     app:cardCornerRadius="20dp"
     app:cardElevation="2dp"
     app:strokeWidth="0dp">
@@ -17,13 +20,14 @@
             android:id="@+id/ivLogo"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#0052FF"
+            android:background="@color/apply_blue"
             android:padding="8dp"
             android:src="@drawable/ic_company"
+            android:contentDescription="@string/content_desc_company_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/CircleImage"
-            app:tint="#FFFFFF" />
+            app:tint="@color/pure_white" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -32,8 +36,10 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_bold"
             android:text="UIUX Design Intern"
-            android:textColor="#121212"
+            android:textColor="@color/deep_black"
             android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@id/tvRating"
             app:layout_constraintStart_toEndOf="@id/ivLogo"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +50,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_bold"
             android:text="★ 4.8"
-            android:textColor="#FF6B00"
+            android:textColor="@color/brand_orange"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -55,8 +61,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="Tokopedia - Jakarta, ID"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/hint_grey"
             android:textSize="13sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="@id/tvTitle"
             app:layout_constraintStart_toStartOf="@id/tvTitle"
             app:layout_constraintTop_toBottomOf="@id/tvTitle" />
@@ -70,7 +78,7 @@
             android:fontFamily="@font/poppins"
             android:maxLines="2"
             android:text="Kolaborasi dengan tim produk untuk merancang user flow, wireframe, dan high-fidelity"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/hint_grey"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/tvCompany"
@@ -83,7 +91,7 @@
             android:layout_marginTop="12dp"
             android:fontFamily="@font/poppins_bold"
             android:text="3 DAYS AGO"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/hint_grey"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="@id/tvDescription"
             app:layout_constraintTop_toBottomOf="@id/tvDescription" />
@@ -93,9 +101,13 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_history"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:contentDescription="Save Company"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:tint="#121212" />
+            app:tint="@color/deep_black" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

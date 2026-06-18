@@ -17,13 +17,14 @@
             android:id="@+id/ivLogo"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:background="#0052FF"
+            android:background="@color/apply_blue"
             android:padding="12dp"
             android:src="@drawable/ic_company"
+            android:contentDescription="@string/content_desc_company_logo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:shapeAppearanceOverlay="@style/CircleImage"
-            app:tint="#FFFFFF" />
+            app:tint="@color/pure_white" />
 
         <TextView
             android:id="@+id/tvCompany"
@@ -32,8 +33,10 @@
             android:layout_marginStart="16dp"
             android:fontFamily="@font/poppins_bold"
             android:text="Google"
-            android:textColor="#121212"
+            android:textColor="@color/deep_black"
             android:textSize="16sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintEnd_toStartOf="@id/btnReview"
             app:layout_constraintStart_toEndOf="@id/ivLogo"
             app:layout_constraintTop_toTopOf="parent" />
@@ -44,8 +47,10 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins"
             android:text="UI/UX Intern"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/hint_grey"
             android:textSize="13sp"
+            android:maxLines="1"
+            android:ellipsize="end"
             app:layout_constraintEnd_toEndOf="@id/tvCompany"
             app:layout_constraintStart_toStartOf="@id/tvCompany"
             app:layout_constraintTop_toBottomOf="@id/tvCompany" />
@@ -55,35 +60,48 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_pill_soft"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/poppins_bold"
             android:paddingHorizontal="16dp"
             android:paddingVertical="6dp"
-            android:text="REVIEW"
-            android:textColor="#FF6B00"
+            android:text="@string/action_review"
+            android:textColor="@color/brand_orange"
             android:textSize="10sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrierInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="ivLogo,tvRole" />
 
         <TextView
             android:id="@+id/tvAppliedDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:fontFamily="@font/poppins"
             android:text="Applied on Sep 12, 2025"
-            android:textColor="#9E9E9E"
+            android:textColor="@color/hint_grey"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/ivLogo" />
+            app:layout_constraintTop_toBottomOf="@id/barrierInfo" />
 
         <TextView
             android:id="@+id/tvDelete"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:foreground="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:fontFamily="@font/poppins_bold"
-            android:text="Hapus"
-            android:textColor="#FF3B30"
+            android:text="@string/action_delete"
+            android:textColor="@color/error_red"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@id/tvAppliedDate"
             app:layout_constraintEnd_toEndOf="parent"

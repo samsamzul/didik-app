@@ -32,6 +32,12 @@ class FormReviewFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Pre-fill data jika dalam mode EDIT
+        if (viewModel.editingReviewId != null) {
+            binding.etPro.setText(viewModel.tempPro)
+            binding.etKontra.setText(viewModel.tempKontra)
+        }
+
         binding.btnNextStep.setOnClickListener {
             saveStep2()
         }
@@ -54,7 +60,7 @@ class FormReviewFragment2 : Fragment() {
         viewModel.tempPro = pro
         viewModel.tempKontra = kontra
         // Skill bisa ditambahkan dari logika ChipGroup jika sudah ada
-        viewModel.tempSkills = listOf("Fgma", "Design System")
+        viewModel.tempSkills = listOf("Figma", "Design System")
 
         // Navigasi ke Step Final (3)
         parentFragmentManager.beginTransaction()
