@@ -96,6 +96,8 @@
         android:layout_marginTop="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/svChipsHistory"
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="45dp"
         tools:listitem="@layout/item_application_card" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
