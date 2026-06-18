@@ -28,7 +28,14 @@
     <string name="label_rating_prefix">★ %1$s</string>
     <string name="label_days_ago">%1$d DAYS AGO</string>
     <string name="position_company">%1$s @ %2$s</string>
-
+    <string name="review_success">Review Berhasil Dikirim</string>
+    <string name="review_success_desc">
+        Terima kasih atas feedback yang Anda berikan.
+        Review Anda akan membantu mahasiswa lain
+        dalam memilih tempat magang.
+    </string>
+    <string name="view_review">Lihat Review</string>
+    <string name="back_home">Kembali ke Beranda</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="lorem_ipsum">
@@ -50,7 +57,9 @@
     <string name="review_appear_info">This is how your review will appear</string>
     <string name="review_feedback_info">Your feedback help other make informed career choices</string>
     <string name="sample_position">Software Engineer Intern</string>
+    <string name="sample_company">TechCop Solution</string>
     <string name="sample_company_info">TechCop Solution • Summer 2023</string>
+    <string name="review_published">✓ Review berhasil dipublikasikan</string>
     <string name="label_culture">Culture</string>
     <string name="label_workload">Workload</string>
     <string name="label_mentorship">Mentorship</string>
@@ -68,4 +77,5 @@
     <string name="checkbox_anonymous">Kirim sebagai anonim untuk menghindari nama anda terlihat pada review</string>
     <string name="btn_edit">Edit</string>
     <string name="btn_publish">Publish Review</string>
+    <string name="action_back">Back</string>
 </resources>

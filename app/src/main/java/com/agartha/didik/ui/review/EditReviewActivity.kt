@@ -1,5 +1,6 @@
 package com.agartha.didik.ui.review
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.agartha.didik.databinding.ActivityEditReviewBinding
@@ -34,6 +35,15 @@ class EditReviewActivity : AppCompatActivity() {
             chip.text = skill
 
             binding.cgSummarySkills.addView(chip)
+        }
+        binding.btnPublish.setOnClickListener {
+
+            startActivity(
+                Intent(
+                    this,
+                    ReviewSuccessActivity::class.java
+                )
+            )
         }
     }
 }
