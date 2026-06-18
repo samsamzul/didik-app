@@ -31,11 +31,12 @@ class AddReviewActivity : AppCompatActivity() {
             insets
         }
 
-        // Tangkap data dari HistoryFragment jika dalam mode EDIT
+        // Tangkap data dari HistoryFragment atau CompanyDetailActivity jika dalam mode EDIT
         val reviewId = intent.getIntExtra("EXTRA_REVIEW_ID", -1)
         if (reviewId != -1) {
             viewModel.setReviewToEdit(
                 id = reviewId,
+                companyId = intent.getIntExtra("company_id", 0),
                 company = intent.getStringExtra("EXTRA_COMPANY") ?: "",
                 pos = intent.getStringExtra("EXTRA_POSITION") ?: "",
                 text = intent.getStringExtra("EXTRA_REVIEW_TEXT") ?: "",
@@ -47,8 +48,10 @@ class AddReviewActivity : AppCompatActivity() {
                 cons = intent.getStringExtra("EXTRA_CONS") ?: ""
             )
         } else {
-            // Jika bukan mode edit, pastikan state form bersih
+            // Jika bukan mode edit, pastikan state form bersih tapi bawa ID perusahaan jika ada
             viewModel.clearFormState()
+            viewModel.tempPerusahaanId = intent.getIntExtra("company_id", 0)
+            viewModel.tempCompanyName = intent.getStringExtra("company") ?: ""
         }
 
         if (savedInstanceState == null) {

@@ -13,6 +13,7 @@ class ReviewRepository(private val ulasanDao: UlasanDao) {
             ReviewModel(
                 reviewId = item.ulasan.id,
                 userId = item.ulasan.userId,
+                companyId = item.ulasan.perusahaanId,
                 companyName = item.namaPerusahaan,
                 position = item.ulasan.namaPosisi,
                 category = item.namaKategori,
@@ -75,6 +76,7 @@ class ReviewRepository(private val ulasanDao: UlasanDao) {
     private fun validateReview(ulasan: UlasanEntity) {
         require(ulasan.teksUlasan.isNotBlank()) { "Teks ulasan tidak boleh kosong" }
         require(ulasan.namaPosisi.isNotBlank()) { "Posisi tidak boleh kosong" }
-        require(ulasan.ratingWorkload in 1..5) { "Rating minimal 1" }
+        // Rating 0 diperbolehkan jika user memang tidak ingin memberi bintang, 
+        // atau kita bisa default ke 1 di level UI
     }
 }

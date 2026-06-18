@@ -46,14 +46,14 @@ interface UlasanDao {
     @Query("""
         SELECT 
             u.*, 
-            p.nama_perusahaan, 
-            p.lokasi,
-            k.nama_kategori as kategori_nama, 
-            us.nama_lengkap as user_nama 
+            IFNULL(p.nama_perusahaan, 'Unknown') as nama_perusahaan, 
+            IFNULL(p.lokasi, '-') as lokasi,
+            IFNULL(k.nama_kategori, 'General') as kategori_nama, 
+            IFNULL(us.nama_lengkap, 'Anonymous') as user_nama 
         FROM ulasan u
-        JOIN perusahaan p ON u.perusahaan_id = p.id
-        JOIN users us ON u.user_id = us.id
-        JOIN kategori_perusahaan k ON p.kategori_id = k.id
+        LEFT JOIN perusahaan p ON u.perusahaan_id = p.id
+        LEFT JOIN users us ON u.user_id = us.id
+        LEFT JOIN kategori_perusahaan k ON p.kategori_id = k.id
     """)
     suspend fun getUlasanLengkap(): List<UlasanLengkap>
 

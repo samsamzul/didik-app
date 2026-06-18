@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agartha.didik.R
 import com.agartha.didik.databinding.FragmentHomeBinding
@@ -24,7 +25,7 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var preferenceManager: PreferenceManager
     
-    private val viewModel: ReviewViewModel by viewModels {
+    private val viewModel: ReviewViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 

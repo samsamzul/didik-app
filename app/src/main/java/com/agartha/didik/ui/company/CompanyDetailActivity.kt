@@ -19,6 +19,11 @@ class CompanyDetailActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.loadReviewsFromDatabase()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -27,6 +32,7 @@ class CompanyDetailActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Ambil data Intent kiriman dari ExploreFragment
+        val companyId = intent.getIntExtra("company_id", 1)
         val companyName = intent.getStringExtra("company") ?: "Unknown Company"
         val position = intent.getStringExtra("position") ?: "Internship"
         val category = intent.getStringExtra("category") ?: "Design & Tech"
@@ -59,9 +65,46 @@ class CompanyDetailActivity : AppCompatActivity() {
                 binding.layoutMentorship.tvRatingValue.text = "${firstReview.ratingMentorship}.0/5.0"
             }
 
-            binding.rvStudentReviews.adapter = ReviewAdapter(companyReviews) {
-                // Handle click jika diperlukan nanti
-            }
+            binding.rvStudentReviews.adapter = ReviewAdapter(
+                listReview = companyReviews,
+                onItemClick = { review ->
+                    // Edit Review
+                    val editIntent = Intent(this, com.agartha.didik.ui.review.AddReviewActivity::class.java).apply {
+                        putExtra("EXTRA_REVIEW_ID", review.reviewId)
+                        putExtra("company_id", review.companyId)
+                        putExtra("EXTRA_COMPANY", review.companyName)
+                        putExtra("EXTRA_POSITION", review.position)
+                        putExtra("EXTRA_REVIEW_TEXT", review.reviewText)
+                        putExtra("EXTRA_RATING", review.rating.toInt())
+                        putExtra("EXTRA_WORKLOAD", review.ratingWorkload)
+                        putExtra("EXTRA_MENTORSHIP", review.ratingMentorship)
+                        putExtra("EXTRA_CULTURE", review.ratingCulture)
+                        putExtra("EXTRA_PROS", review.pros)
+                        putExtra("EXTRA_CONS", review.cons)
+                    }
+                    startActivity(editIntent)
+                },
+                onDeleteClick = { review ->
+                    // Hapus Review
+                    val ulasanEntity = com.agartha.didik.data.local.entity.UlasanEntity(
+                        id = review.reviewId,
+                        userId = review.userId,
+                        perusahaanId = review.companyId,
+                        namaPosisi = review.position,
+                        deskripsiKerja = review.jobDesc,
+                        ratingWorkload = review.ratingWorkload,
+                        ratingMentorship = review.ratingMentorship,
+                        ratingCulture = review.ratingCulture,
+                        teksUlasan = review.reviewText,
+                        ilmuDidapat = "", // Placeholder
+                        poinKelebihan = review.pros,
+                        poinKekurangan = review.cons,
+                        isAnonim = false
+                    )
+                    viewModel.deleteReview(ulasanEntity)
+                    Toast.makeText(this, "Review deleted", Toast.LENGTH_SHORT).show()
+                }
+            )
         }
 
         // Tombol Kembali
@@ -77,6 +120,7 @@ class CompanyDetailActivity : AppCompatActivity() {
         // Tombol Tulis Ulasan (Pindah ke AddReviewActivity)
         binding.btnWriteReview.setOnClickListener {
             val intent = Intent(this, com.agartha.didik.ui.review.AddReviewActivity::class.java).apply {
+                putExtra("company_id", companyId)
                 putExtra("company", companyName)
             }
             startActivity(intent)

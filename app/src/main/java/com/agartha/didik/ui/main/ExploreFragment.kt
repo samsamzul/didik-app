@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agartha.didik.R
 import com.agartha.didik.databinding.FragmentExploreBinding
@@ -22,7 +23,7 @@ class ExploreFragment : Fragment() {
     private var _binding: FragmentExploreBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ReviewViewModel by viewModels {
+    private val viewModel: ReviewViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 
@@ -106,6 +107,7 @@ class ExploreFragment : Fragment() {
     private fun updateList(list: List<ReviewModel>) {
         binding.rvInternships.adapter = ReviewAdapter(list) { review ->
             val intent = Intent(requireContext(), CompanyDetailActivity::class.java).apply {
+                putExtra("company_id", review.companyId)
                 putExtra("company", review.companyName)
                 putExtra("position", review.position)
                 putExtra("category", review.category)

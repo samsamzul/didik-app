@@ -45,6 +45,13 @@ class FormReviewFragmentFinal3 : Fragment() {
             binding.btnPublish.text = "Update Review"
         }
 
+        // Observasi error dari ViewModel
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            if (errorMessage != null) {
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+            }
+        }
+
         binding.btnPublish.setOnClickListener {
             publishFinalReview()
         }
@@ -102,7 +109,8 @@ class FormReviewFragmentFinal3 : Fragment() {
         val reviewData = UlasanEntity(
             id = viewModel.editingReviewId ?: 0,
             userId = userId,
-            perusahaanId = 1, // Placeholder: seharusnya ID perusahaan yang dipilih
+            // Pastikan perusahaanId tidak 0 agar join tidak gagal
+            perusahaanId = if (viewModel.tempPerusahaanId != 0) viewModel.tempPerusahaanId else 1,
             namaPosisi = viewModel.tempPosition,
             deskripsiKerja = viewModel.tempReviewText,
             ratingWorkload = viewModel.tempRatingWorkload,
@@ -118,19 +126,29 @@ class FormReviewFragmentFinal3 : Fragment() {
         // Simpan via ViewModel sesuai mode (Insert / Update)
         if (viewModel.editingReviewId != null) {
             viewModel.updateReview(reviewData)
-            Toast.makeText(requireContext(), "Ulasan berhasil diperbarui!", Toast.LENGTH_SHORT).show()
         } else {
             viewModel.insertReview(reviewData)
-            Toast.makeText(requireContext(), "Ulasan berhasil dikirim!", Toast.LENGTH_SHORT).show()
         }
         
-        // Cek apakah fragment berada di dalam activity yang menampung Bottom Navigation
-        val mainActivity = activity as? com.agartha.didik.ui.main.MainActivity
-        if (mainActivity != null) {
-            parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
-        } else {
-            activity?.finish()
-        }
+        Toast.makeText(requireContext(), "Memproses ulasan...", Toast.LENGTH_SHORT).show()
+        
+        view?.postDelayed({
+            if (viewModel.error.value == null) {
+                Toast.makeText(requireContext(), "Ulasan Berhasil Simpan!", Toast.LENGTH_SHORT).show()
+                // Cek apakah fragment berada di dalam activity yang menampung Bottom Navigation
+                val mainActivity = activity as? com.agartha.didik.ui.main.MainActivity
+                if (mainActivity != null) {
+                    // Bersihkan backstack navigasi form review
+                    parentFragmentManager.popBackStack(null, androidx.fragment.app.FragmentManager.POP_BACK_STACK_INCLUSIVE)
+                    
+                    // Pindah ke tab History (Application)
+                    val bottomNav = mainActivity.findViewById<com.google.android.material.bottomnavigation.BottomNavigationView>(R.id.bottom_navigation)
+                    bottomNav.selectedItemId = R.id.nav_application
+                } else {
+                    activity?.finish()
+                }
+            }
+        }, 500)
     }
 
     override fun onDestroyView() {

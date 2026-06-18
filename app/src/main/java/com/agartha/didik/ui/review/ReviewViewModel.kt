@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 data class ReviewModel(
     val reviewId: Int = 0,
     val userId: Int,
+    val companyId: Int = 0,
     val companyName: String,
     val position: String,
     val category: String,
@@ -31,9 +32,13 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
 
     private val _reviews = MutableLiveData<List<ReviewModel>>()
     val reviews: LiveData<List<ReviewModel>> get() = _reviews
+    
+    private val _error = MutableLiveData<String?>()
+    val error: LiveData<String?> get() = _error
 
     // State untuk Multi-step Form (Shared across Fragments)
     var editingReviewId: Int? = null
+    var tempPerusahaanId: Int = 0
     var tempCompanyName: String = ""
     var tempPosition: String = ""
     var tempReviewText: String = ""
@@ -62,23 +67,41 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
 
     fun insertReview(ulasan: UlasanEntity) {
         viewModelScope.launch {
-            reviewRepository.createNewReview(ulasan)
-            loadReviewsFromDatabase()
+            try {
+                reviewRepository.createNewReview(ulasan)
+                loadReviewsFromDatabase()
+                _error.value = null
+            } catch (e: Exception) {
+                _error.value = e.message ?: "Gagal menyimpan ulasan"
+            }
         }
     }
 
     fun updateReview(ulasan: UlasanEntity) {
         viewModelScope.launch {
-            reviewRepository.updateExistingReview(ulasan)
+            try {
+                reviewRepository.updateExistingReview(ulasan)
+                loadReviewsFromDatabase()
+                _error.value = null
+            } catch (e: Exception) {
+                _error.value = e.message ?: "Gagal memperbarui ulasan"
+            }
+        }
+    }
+
+    fun deleteReview(ulasan: UlasanEntity) {
+        viewModelScope.launch {
+            reviewRepository.deleteExistingReview(ulasan)
             loadReviewsFromDatabase()
         }
     }
 
     fun setReviewToEdit(
-        id: Int, company: String, pos: String, text: String, 
+        id: Int, companyId: Int, company: String, pos: String, text: String, 
         rating: Int, work: Int, ment: Int, cult: Int, pros: String, cons: String
     ) {
         editingReviewId = id
+        tempPerusahaanId = companyId
         tempCompanyName = company
         tempPosition = pos
         tempReviewText = text
@@ -92,6 +115,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
 
     fun clearFormState() {
         editingReviewId = null
+        tempPerusahaanId = 0
         tempCompanyName = ""
         tempPosition = ""
         tempReviewText = ""

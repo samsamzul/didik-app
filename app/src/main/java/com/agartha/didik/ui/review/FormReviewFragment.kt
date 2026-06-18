@@ -31,8 +31,8 @@ class FormReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Pre-fill data jika dalam mode EDIT
-        if (viewModel.editingReviewId != null) {
+        // Pre-fill data jika dalam mode EDIT atau jika data sudah di-set dari Company Detail
+        if (viewModel.editingReviewId != null || viewModel.tempCompanyName.isNotEmpty()) {
             binding.etCompanyName.setText(viewModel.tempCompanyName)
             binding.etPosition.setText(viewModel.tempPosition)
             binding.etReviewText.setText(viewModel.tempReviewText)
@@ -41,8 +41,9 @@ class FormReviewFragment : Fragment() {
             binding.rbMentorship.rating = viewModel.tempRatingMentorship.toFloat()
             binding.rbCulture.rating = viewModel.tempRatingCulture.toFloat()
             
-            // Ubah teks tombol jika perlu
-            binding.btnSave.text = "Update & Next"
+            if (viewModel.editingReviewId != null) {
+                binding.btnSave.text = "Update & Next"
+            }
         }
 
         binding.btnSave.setOnClickListener {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agartha.didik.R
 import com.agartha.didik.databinding.FragmentCompanyDetailBinding
@@ -20,7 +21,7 @@ class CompanyDetailFragment : Fragment() {
     private var _binding: FragmentCompanyDetailBinding? = null
     private val binding get() = _binding!!
     
-    private val viewModel: ReviewViewModel by viewModels {
+    private val viewModel: ReviewViewModel by activityViewModels {
         ViewModelFactory.getInstance(requireContext())
     }
 
@@ -35,24 +36,29 @@ class CompanyDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val companyId = arguments?.getInt("company_id") ?: 1
         val companyName = arguments?.getString("company") ?: "Unknown Company"
         val position = arguments?.getString("position") ?: "Internship"
         val category = arguments?.getString("category") ?: "Category"
         
         binding.tvToolbarTitle.text = companyName
-        // Asumsi ada tvCompanyPosition dan tvCompanyCategory di layout fragment_company_detail
-        // Jika tidak ada, baris di bawah ini bisa dikomentari
-        // binding.tvCompanyPosition.text = position
-        // binding.tvCompanyCategory.text = category
+        binding.tvCompanyPosition.text = position
+        binding.tvCompanyCategory.text = category
         
         binding.rvStudentReviews.layoutManager = LinearLayoutManager(requireContext())
         
         viewModel.reviews.observe(viewLifecycleOwner) { reviews ->
-            // Filter ulasan berdasarkan nama perusahaan
-            val companyReviews = reviews.filter { it.companyName == companyName }
-            binding.rvStudentReviews.adapter = ReviewAdapter(companyReviews) {
-                // Handle click
+            // Filter ulasan berdasarkan nama perusahaan (Case Insensitive untuk akurasi)
+            val companyReviews = reviews.filter { 
+                it.companyName.equals(companyName, ignoreCase = true) || it.companyId == companyId 
             }
+            
+            binding.rvStudentReviews.adapter = ReviewAdapter(
+                listReview = companyReviews,
+                onItemClick = { review ->
+                    // Handle click untuk detail atau edit
+                }
+            )
         }
 
         binding.ivBackDetail.setOnClickListener {
@@ -60,6 +66,12 @@ class CompanyDetailFragment : Fragment() {
         }
 
         binding.btnWriteReview.setOnClickListener {
+            // Set context perusahaan ke ViewModel agar FormReviewFragment otomatis terisi
+            viewModel.clearFormState()
+            viewModel.tempPerusahaanId = companyId
+            viewModel.tempCompanyName = companyName
+            viewModel.tempPosition = position
+
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, FormReviewFragment())
                 .addToBackStack(null)

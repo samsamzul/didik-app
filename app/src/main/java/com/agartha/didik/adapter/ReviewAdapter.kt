@@ -12,7 +12,8 @@ import com.agartha.didik.ui.review.ReviewModel
  */
 class ReviewAdapter(
     private val listReview: List<ReviewModel>, // Daftar data review yang akan ditampilkan
-    private val onItemClick: (ReviewModel) -> Unit // Callback saat item diklik
+    private val onDeleteClick: ((ReviewModel) -> Unit)? = null, // Callback saat tombol hapus diklik
+    private val onItemClick: (ReviewModel) -> Unit // Callback saat item diklik (Edit)
 ) : RecyclerView.Adapter<ReviewAdapter.ViewHolder>() {
 
     /**
@@ -42,9 +43,19 @@ class ReviewAdapter(
         holder.binding.tvReviewContent.text = review.reviewText
         holder.binding.tvTagCategory.text = review.category
 
-        // Menangani aksi klik pada item
+        // Menangani aksi klik pada item (untuk Edit)
         holder.itemView.setOnClickListener {
             onItemClick(review)
+        }
+
+        // Menangani aksi klik pada tombol hapus
+        if (onDeleteClick != null) {
+            holder.binding.ivDelete.visibility = android.view.View.VISIBLE
+            holder.binding.ivDelete.setOnClickListener {
+                onDeleteClick.invoke(review)
+            }
+        } else {
+            holder.binding.ivDelete.visibility = android.view.View.GONE
         }
     }
 
