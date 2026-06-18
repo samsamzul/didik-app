@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".ui.review.FormReviewFragmentFinal3">
+
+    <!-- Header Section -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_top_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:padding="4dp"
+            android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="#666666"
+            android:contentDescription="Back Button" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="Write your review"
+            android:textColor="#FF6B00"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tvStep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_bold"
+            android:text="3/3"
+            android:textColor="#FF6B00"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/btnPublish"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Info Box -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="#D6E4FF"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:src="@drawable/ic_explore"
+                        app:tint="#0052FF"
+                        android:contentDescription="Info Icon" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins_bold"
+                            android:text="This is how your review will appear"
+                            android:textColor="#121212"
+                            android:textSize="13sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/poppins"
+                            android:text="Your feedback help other make informed career choices"
+                            android:textColor="#666666"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Review Summary Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:cardBackgroundColor="@color/pure_white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.card.MaterialCardView
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            app:cardBackgroundColor="#E0E0E0"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+                            <ImageView
+                                android:id="@+id/ivCompanyLogo"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerCrop"
+                                android:src="@drawable/ic_company"
+                                android:padding="12dp"
+                                app:tint="#666666"
+                                android:contentDescription="Company Logo" />
+                        </com.google.android.material.card.MaterialCardView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvSummaryPosition"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Software Engineer Intern"
+                                android:textColor="#121212"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvSummaryCompany"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:text="TechCorp Solutions - Summer 2023"
+                                android:textColor="#666666"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Ratings -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:orientation="vertical">
+
+                        <!-- Culture -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp">
+                            <ImageView
+                                android:id="@+id/icCulture"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_profile"
+                                app:tint="#121212"
+                                android:contentDescription="Culture Icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/icCulture"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Culture"
+                                android:textColor="#121212"
+                                android:textSize="13sp"/>
+                            <RatingBar
+                                android:id="@+id/rbCulture"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:numStars="5"
+                                android:rating="3"
+                                android:progressTint="#FF6B00" />
+                        </RelativeLayout>
+
+                        <!-- Workload -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="12dp">
+                            <ImageView
+                                android:id="@+id/icWorkload"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_job_desc"
+                                app:tint="#121212"
+                                android:contentDescription="Workload Icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/icWorkload"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Workload"
+                                android:textColor="#121212"
+                                android:textSize="13sp"/>
+                            <RatingBar
+                                android:id="@+id/rbWorkload"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:numStars="5"
+                                android:rating="4"
+                                android:progressTint="#FF6B00" />
+                        </RelativeLayout>
+
+                        <!-- Mentorship -->
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:id="@+id/icMentorship"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_history"
+                                app:tint="#121212"
+                                android:contentDescription="Mentorship Icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_toEndOf="@id/icMentorship"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Mentorship"
+                                android:textColor="#121212"
+                                android:textSize="13sp"/>
+                            <RatingBar
+                                android:id="@+id/rbMentorship"
+                                style="?android:attr/ratingBarStyleSmall"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:numStars="5"
+                                android:rating="3"
+                                android:progressTint="#FF6B00" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <!-- Pro -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Pro"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvSummaryPro"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="• Lingkungan kerja yang positif\n• Saya mendapat banyak ilmu baru\n• Teman kerjanya sangat suportif"
+                        android:textColor="#121212"
+                        android:textSize="13sp" />
+
+                    <!-- Kontra -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Kontra"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/tvSummaryKontra"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="• Waktu kerja yang tidak teratur\n• Beberapa job desk tidak sesuai"
+                        android:textColor="#121212"
+                        android:textSize="13sp" />
+
+                    <!-- Skills -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="Skill yang didapat"
+                        android:textColor="#666666"
+                        android:textSize="12sp" />
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cgSummarySkills"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        app:chipSpacingHorizontal="8dp">
+                        <!-- Chips will be added dynamically -->
+                    </com.google.android.material.chip.ChipGroup>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Anonymous Card -->
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/pure_white"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+                        <ImageView
+                            android:id="@+id/ivAnonIcon"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/bg_pill_soft"
+                            android:contentDescription="Anonymous Icon" />
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/ivAnonIcon"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical"
+                            android:layout_centerVertical="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins_bold"
+                                android:text="Kirim Sebagai Anonim"
+                                android:textColor="#121212"
+                                android:textSize="14sp" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/poppins"
+                                android:text="Nama anda tidak akan muncul"
+                                android:textColor="#666666"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                        <com.google.android.material.switchmaterial.SwitchMaterial
+                            android:id="@+id/switchAnonim"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:thumbTint="#FF6B00"
+                            app:trackTint="#FFD0B0" />
+                    </RelativeLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        app:cardBackgroundColor="#E8EFFF"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:padding="12dp"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:src="@drawable/ic_search"
+                                app:tint="#0052FF"
+                                android:contentDescription="Alert Icon" />
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/poppins"
+                                android:text="Kirim sebagai anonim untuk menghindari nama anda terlihat pada review"
+                                android:textColor="#666666"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnPublish"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_margin="20dp"
+        android:backgroundTint="#FF6B00"
+        android:fontFamily="@font/poppins_bold"
+        android:text="Publish Review"
+        android:textAllCaps="false"
+        app:cornerRadius="12dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

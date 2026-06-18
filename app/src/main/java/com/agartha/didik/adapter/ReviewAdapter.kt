@@ -48,6 +48,7 @@ class ReviewAdapter(
         }
     }
 
+
     /**
      * Mengembalikan jumlah total item dalam daftar.
      */

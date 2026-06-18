@@ -5,9 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.agartha.didik.data.repository.ReviewRepository
+import com.agartha.didik.data.local.entity.UlasanEntity
 import kotlinx.coroutines.launch
 
-// 🌟 STRUKTUR DATA MODEL YANG DICARI ADAPTER & ACTIVITY TEMENMU
+
 data class ReviewModel(
     val companyName: String,
     val position: String,
@@ -23,6 +24,22 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
     private val _reviews = MutableLiveData<List<ReviewModel>>()
     val reviews: LiveData<List<ReviewModel>> get() = _reviews
 
+    // State untuk Multi-step Form (Shared across Fragments)
+    var tempCompanyName: String = ""
+    var tempPosition: String = ""
+    var tempReviewText: String = ""
+    var tempRating: Int = 0
+
+    // Ratings spesifik dari Step 1
+    var tempRatingWorkload: Int = 0
+    var tempRatingMentorship: Int = 0
+    var tempRatingCulture: Int = 0
+
+    // Step 2 State
+    var tempPro: String = ""
+    var tempKontra: String = ""
+    var tempSkills: List<String> = listOf()
+
     init {
         loadReviewsFromDatabase()
     }
@@ -36,8 +53,10 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
         }
     }
 
-    // Fungsi lama buat backup jika database kosong (Optional)
-    private fun loadDummyReviews() {
-        // ... (tetap ada atau dihapus)
+    fun insertReview(ulasan: UlasanEntity) {
+        viewModelScope.launch {
+            reviewRepository.createNewReview(ulasan)
+            loadReviewsFromDatabase() // Refresh data setelah simpan
+        }
     }
 }

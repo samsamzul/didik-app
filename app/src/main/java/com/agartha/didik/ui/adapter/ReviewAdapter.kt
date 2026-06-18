@@ -33,6 +33,7 @@ class ReviewAdapter(
                 onItemClick?.invoke(listData[position])
             }
         }
+
     }
 
     // Mengembalikan ukuran listData, jika kosongan otomatis mengembalikan 0
