@@ -78,4 +78,14 @@
     <string name="btn_edit">Edit</string>
     <string name="btn_publish">Publish Review</string>
     <string name="action_back">Back</string>
+
+    <string name="title_recommendations">Rekomendasi Untukmu</string>
+    <string name="action_view_all">Lihat Semua</string>
+    <string name="title_explore_companies">Eksplor Perusahaan</string>
+    <string name="filter_all">All</string>
+    <string name="filter_fintech">Fintech</string>
+    <string name="filter_healthtech">Healthtech</string>
+    <string name="content_desc_search">Search Icon</string>
+    <string name="content_desc_bookmark">Bookmark Icon</string>
+    <string name="content_desc_profile">Profile Picture</string>
 </resources>

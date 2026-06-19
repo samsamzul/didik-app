@@ -26,6 +26,7 @@
                 android:foreground="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:focusable="true"
+                android:contentDescription="@string/content_desc_profile"
                 app:shapeAppearanceOverlay="@style/CircleImage"
                 app:tint="@color/deep_black"
                 android:padding="8dp" />
@@ -36,11 +37,15 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:layout_marginStart="16dp"
+                android:layout_marginEnd="8dp"
                 android:layout_toEndOf="@id/ivProfileHome"
+                android:layout_toStartOf="@id/ivBookmark"
                 android:fontFamily="@font/poppins_bold"
                 android:text="@string/tvGreeting"
                 android:textColor="@color/brand_orange"
-                android:textSize="20sp" />
+                android:textSize="20sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
             <ImageView
                 android:id="@+id/ivBookmark"
@@ -53,6 +58,7 @@
                 android:focusable="true"
                 android:padding="8dp"
                 android:src="@drawable/ic_history"
+                android:contentDescription="@string/content_desc_bookmark"
                 app:tint="@color/deep_black" />
         </RelativeLayout>
 
@@ -77,6 +83,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/ic_search"
+                    android:contentDescription="@string/content_desc_search"
                     app:tint="@color/brand_orange" />
 
                 <EditText
@@ -86,6 +93,8 @@
                     android:background="@android:color/transparent"
                     android:fontFamily="@font/poppins"
                     android:hint="@string/etSearch"
+                    android:inputType="text"
+                    android:autofillHints="none"
                     android:paddingStart="12dp"
                     android:paddingEnd="12dp"
                     android:textSize="14sp" />
@@ -102,7 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Rekomendasi Untukmu"
+                android:text="@string/title_recommendations"
                 android:textColor="@color/deep_black"
                 android:textSize="18sp" />
 
@@ -117,7 +126,7 @@
                 android:focusable="true"
                 android:padding="4dp"
                 android:fontFamily="@font/poppins_bold"
-                android:text="Lihat Semua"
+                android:text="@string/action_view_all"
                 android:textColor="@color/apply_blue"
                 android:textSize="14sp" />
         </RelativeLayout>
@@ -137,7 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:fontFamily="@font/poppins_bold"
-            android:text="Eksplor Perusahaan"
+            android:text="@string/title_explore_companies"
             android:textColor="@color/deep_black"
             android:textSize="18sp" />
 
@@ -153,7 +162,7 @@
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="All"
+                android:text="@string/filter_all"
                 android:checked="true" />
 
             <com.google.android.material.chip.Chip
@@ -161,14 +170,14 @@
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Fintech" />
+                android:text="@string/filter_fintech" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chipHealthtech"
                 style="@style/Widget.Material3.Chip.Filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Healthtech" />
+                android:text="@string/filter_healthtech" />
         </com.google.android.material.chip.ChipGroup>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -177,7 +186,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:nestedScrollingEnabled="false"
-            tools:listitem="@layout/item_review" />
+            tools:listitem="@layout/item_company_card" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>
