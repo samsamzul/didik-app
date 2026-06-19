@@ -13,14 +13,14 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Write Your Review"
-                android:textColor="#FF6B00"
+                android:textColor="@color/brand_orange"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/poppins_bold"
                 android:text="1/3"
-                android:textColor="#FF6B00"
+                android:textColor="@color/brand_orange"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
                 <TextView
                     style="@style/LabelForm"
                     android:layout_marginTop="16dp"
-                    android:text="Rating" />
+                    android:text="Overall Rating" />
 
                 <RatingBar
                     android:id="@+id/rbReview"
@@ -97,117 +97,121 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:numStars="5"
-                    android:progressTint="#FF6B00"
+                    android:progressTint="@color/star_active"
                     android:stepSize="1" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
 
                     <!-- Culture -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/icCulture"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:contentDescription="Culture Icon"
                             android:src="@drawable/ic_profile"
-                            app:tint="#121212" />
+                            app:tint="@color/deep_black" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_toEndOf="@id/icCulture"
+                            android:layout_weight="1"
                             android:fontFamily="@font/poppins"
                             android:text="Culture"
-                            android:textColor="#121212"
+                            android:textColor="@color/deep_black"
                             android:textSize="13sp" />
 
                         <RatingBar
                             android:id="@+id/rbCulture"
-                            style="?android:attr/ratingBarStyleSmall"
+                            style="@android:style/Widget.Material.RatingBar.Indicator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
+                            android:isIndicator="false"
                             android:numStars="5"
-                            android:progressTint="#FF6B00"
-                             />
-                    </RelativeLayout>
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
+                            android:progressTint="@color/star_active" />
+                    </LinearLayout>
 
                     <!-- Workload -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="12dp">
+                        android:layout_marginBottom="12dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/icWorkload"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:contentDescription="Workload Icon"
                             android:src="@drawable/ic_job_desc"
-                            app:tint="#121212" />
+                            app:tint="@color/deep_black" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_toEndOf="@id/icWorkload"
+                            android:layout_weight="1"
                             android:fontFamily="@font/poppins"
                             android:text="Workload"
-                            android:textColor="#121212"
+                            android:textColor="@color/deep_black"
                             android:textSize="13sp" />
 
                         <RatingBar
                             android:id="@+id/rbWorkload"
-                            style="?android:attr/ratingBarStyleSmall"
+                            style="@android:style/Widget.Material.RatingBar.Indicator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
+                            android:isIndicator="false"
                             android:numStars="5"
-                            android:progressTint="#FF6B00" />
-                    </RelativeLayout>
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
+                            android:progressTint="@color/star_active" />
+                    </LinearLayout>
 
                     <!-- Mentorship -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
 
                         <ImageView
-                            android:id="@+id/icMentorship"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:contentDescription="Mentorship Icon"
                             android:src="@drawable/ic_history"
-                            app:tint="#121212" />
+                            app:tint="@color/deep_black" />
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"
-                            android:layout_toEndOf="@id/icMentorship"
+                            android:layout_weight="1"
                             android:fontFamily="@font/poppins"
                             android:text="Mentorship"
-                            android:textColor="#121212"
+                            android:textColor="@color/deep_black"
                             android:textSize="13sp" />
 
                         <RatingBar
                             android:id="@+id/rbMentorship"
-                            style="?android:attr/ratingBarStyleSmall"
+                            style="@android:style/Widget.Material.RatingBar.Indicator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
+                            android:isIndicator="false"
                             android:numStars="5"
-                            android:progressTint="#FF6B00"
-                            />
-                    </RelativeLayout>
+                            android:scaleX="0.7"
+                            android:scaleY="0.7"
+                            android:progressTint="@color/star_active" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
@@ -215,7 +219,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="55dp"
                     android:layout_marginTop="32dp"
-                    android:backgroundTint="#FF6B00"
+                    android:backgroundTint="@color/brand_orange"
                     android:fontFamily="@font/poppins_bold"
                     android:text="Next"
                     android:textAllCaps="false"

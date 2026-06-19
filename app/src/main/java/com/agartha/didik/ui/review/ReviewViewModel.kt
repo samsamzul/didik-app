@@ -8,7 +8,6 @@ import com.agartha.didik.data.repository.ReviewRepository
 import com.agartha.didik.data.local.entity.UlasanEntity
 import kotlinx.coroutines.launch
 
-
 data class ReviewModel(
     val reviewId: Int = 0,
     val userId: Int,
@@ -25,6 +24,7 @@ data class ReviewModel(
     val ratingCulture: Int = 0,
     val pros: String = "",
     val cons: String = "",
+    val isAnonim: Boolean = false,
     val location: String = "Jakarta"
 )
 
@@ -43,15 +43,12 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
     var tempPosition: String = ""
     var tempReviewText: String = ""
     var tempRating: Int = 0
-
-    // Ratings spesifik dari Step 1
     var tempRatingWorkload: Int = 0
     var tempRatingMentorship: Int = 0
     var tempRatingCulture: Int = 0
-
-    // Step 2 State
     var tempPro: String = ""
     var tempKontra: String = ""
+    var tempIsAnonim: Boolean = false
     var tempSkills: List<String> = listOf()
 
     init {
@@ -72,7 +69,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
                 loadReviewsFromDatabase()
                 _error.value = null
             } catch (e: Exception) {
-                _error.value = e.message ?: "Gagal menyimpan ulasan"
+                _error.value = e.message
             }
         }
     }
@@ -84,21 +81,26 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
                 loadReviewsFromDatabase()
                 _error.value = null
             } catch (e: Exception) {
-                _error.value = e.message ?: "Gagal memperbarui ulasan"
+                _error.value = e.message
             }
         }
     }
 
     fun deleteReview(ulasan: UlasanEntity) {
         viewModelScope.launch {
-            reviewRepository.deleteExistingReview(ulasan)
-            loadReviewsFromDatabase()
+            try {
+                reviewRepository.deleteExistingReview(ulasan)
+                loadReviewsFromDatabase()
+                _error.value = null
+            } catch (e: Exception) {
+                _error.value = e.message
+            }
         }
     }
 
     fun setReviewToEdit(
         id: Int, companyId: Int, company: String, pos: String, text: String, 
-        rating: Int, work: Int, ment: Int, cult: Int, pros: String, cons: String
+        rating: Int, work: Int, ment: Int, cult: Int, pros: String, cons: String, anonim: Boolean
     ) {
         editingReviewId = id
         tempPerusahaanId = companyId
@@ -111,6 +113,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
         tempRatingCulture = cult
         tempPro = pros
         tempKontra = cons
+        tempIsAnonim = anonim
     }
 
     fun clearFormState() {
@@ -125,6 +128,7 @@ class ReviewViewModel(private val reviewRepository: ReviewRepository) : ViewMode
         tempRatingCulture = 0
         tempPro = ""
         tempKontra = ""
+        tempIsAnonim = false
         tempSkills = listOf()
     }
 }

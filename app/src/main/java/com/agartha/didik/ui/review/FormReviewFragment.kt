@@ -31,11 +31,14 @@ class FormReviewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Pre-fill data jika dalam mode EDIT atau jika data sudah di-set dari Company Detail
+        // 1. Logika Pre-fill (Saat Edit atau balik dari Step 2)
+        // Kita tampilkan data yang sudah tersimpan di ViewModel ke UI
         if (viewModel.editingReviewId != null || viewModel.tempCompanyName.isNotEmpty()) {
             binding.etCompanyName.setText(viewModel.tempCompanyName)
             binding.etPosition.setText(viewModel.tempPosition)
             binding.etReviewText.setText(viewModel.tempReviewText)
+            
+            // Set Rating ke RatingBar
             binding.rbReview.rating = viewModel.tempRating.toFloat()
             binding.rbWorkload.rating = viewModel.tempRatingWorkload.toFloat()
             binding.rbMentorship.rating = viewModel.tempRatingMentorship.toFloat()
@@ -47,25 +50,33 @@ class FormReviewFragment : Fragment() {
         }
 
         binding.btnSave.setOnClickListener {
-            saveToViewModel()
+            saveAndGoNext()
         }
     }
 
-    private fun saveToViewModel() {
+    private fun saveAndGoNext() {
         val companyName = binding.etCompanyName.text.toString().trim()
         val position = binding.etPosition.text.toString().trim()
         val reviewText = binding.etReviewText.text.toString().trim()
         
+        // 2. Ambil nilai rating dari UI (Aktif)
         val ratingUtama = binding.rbReview.rating.toInt()
         val ratingWork = binding.rbWorkload.rating.toInt()
         val ratingMent = binding.rbMentorship.rating.toInt()
         val ratingCulture = binding.rbCulture.rating.toInt()
 
+        // Validasi input
         if (companyName.isEmpty() || position.isEmpty() || reviewText.isEmpty()) {
             Toast.makeText(requireContext(), "Harap isi semua bidang", Toast.LENGTH_SHORT).show()
             return
         }
+        
+        if (ratingUtama == 0) {
+            Toast.makeText(requireContext(), "Harap berikan rating keseluruhan", Toast.LENGTH_SHORT).show()
+            return
+        }
 
+        // 3. Simpan semua data ke Shared ViewModel
         viewModel.tempCompanyName = companyName
         viewModel.tempPosition = position
         viewModel.tempReviewText = reviewText
@@ -74,6 +85,7 @@ class FormReviewFragment : Fragment() {
         viewModel.tempRatingMentorship = ratingMent
         viewModel.tempRatingCulture = ratingCulture
 
+        // Navigasi ke Step 2 (Pro & Kontra)
         parentFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, FormReviewFragment2())
             .addToBackStack(null)
