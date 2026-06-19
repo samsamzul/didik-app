@@ -56,7 +56,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
+    
     // SETELAN ROOM DATABASE
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)

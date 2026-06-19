@@ -7,13 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.agartha.didik.R
 import com.agartha.didik.databinding.FragmentExploreBinding
-import com.agartha.didik.adapter.ReviewAdapter
 import com.agartha.didik.ui.ViewModelFactory
+import com.agartha.didik.ui.adapter.CompanyAdapter
 import com.agartha.didik.ui.company.CompanyDetailActivity
 import com.agartha.didik.ui.review.ReviewViewModel
 import com.agartha.didik.ui.review.ReviewModel
@@ -80,23 +79,20 @@ class ExploreFragment : Fragment() {
             // 2. Logika Filter Berdasarkan Chip
             val matchesFilter = when (checkedChipId) {
                 R.id.chipRemote -> {
-                    // Cek kata "remote" di lokasi atau judul posisi
                     review.location.contains("remote", ignoreCase = true) ||
                             review.position.contains("remote", ignoreCase = true)
                 }
                 R.id.chipDuration -> {
-                    // Estimasi durasi berdasarkan kata kunci di deskripsi atau posisi
                     review.position.contains("month", ignoreCase = true) ||
                             review.position.contains("bulan", ignoreCase = true) ||
                             review.jobDesc.contains("month", ignoreCase = true) ||
                             review.jobDesc.contains("bulan", ignoreCase = true)
                 }
                 R.id.chipRole -> {
-                    // Filter peran spesifik teknologi/desain
                     val roles = listOf("engineer", "designer", "developer", "analyst", "ui", "ux")
                     roles.any { role -> review.position.contains(role, ignoreCase = true) }
                 }
-                else -> true // chipAll atau tidak ada yang terpilih, tampilkan semua
+                else -> true 
             }
 
             matchesSearch && matchesFilter
@@ -105,7 +101,7 @@ class ExploreFragment : Fragment() {
     }
 
     private fun updateList(list: List<ReviewModel>) {
-        binding.rvInternships.adapter = ReviewAdapter(list) { review ->
+        binding.rvInternships.adapter = CompanyAdapter(list) { review ->
             val intent = Intent(requireContext(), CompanyDetailActivity::class.java).apply {
                 putExtra("company_id", review.companyId)
                 putExtra("company", review.companyName)
